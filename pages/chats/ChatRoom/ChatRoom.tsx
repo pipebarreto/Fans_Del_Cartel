@@ -7,14 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Input, Button } from'react-native-elements';
 import { ListItem } from'react-native-elements';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {
-  Bubble,
-  GiftedChat,
-  SystemMessage,
-  IMessage,
-  Send,
-  SendProps,
-} from 'react-native-gifted-chat'
+
 import MessageInput from './MessageInput';
 
 export default function ChatRoom({route}) {
