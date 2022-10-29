@@ -17,10 +17,6 @@ import { Icon } from'react-native-elements';
 export default function MessageInput ({ onPressSend }) {
   const [message, setMessage] = useState('');
 
-  const changeTextHandler = value => {
-    setMessage(value);
-  };
-
   const submitMessageHandler = () => {
     if (message) {
       onPressSend(message);
@@ -30,6 +26,7 @@ export default function MessageInput ({ onPressSend }) {
   
 
   return (
+
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
 

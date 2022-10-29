@@ -22,8 +22,6 @@ export default function PagesNavigator() {
   return (
 
     
-  <NavigationContainer>
-
   <Tab.Navigator screenOptions={({route }) => ({ 
         tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -32,7 +30,7 @@ export default function PagesNavigator() {
             } else if (route.name === 'Chat') {  
                 iconName = 'forum';
             } else if (route.name === 'Audio') {  
-              iconName = 'radio';
+              iconName = 'library-music';
           }              
           return <Icon name={iconName} size={size} color={color} tvParallaxProperties={undefined}  />
            }
@@ -47,21 +45,20 @@ export default function PagesNavigator() {
     </Tab.Navigator>
 
   
-  </NavigationContainer>
 
 
   );
 }
 
-const screenOptions = {
+/*const screenOptions = {
   tabBarStyle:{
     backgroundColor:'#150050',
     height:100,
     
   },
-  /*tabBarItemStyle:{
+  tabBarItemStyle:{
     backgroundColor:'#00ff00',
     margin:5,
     borderRadius:10,
-  }*/
-};
+  }
+};*/
