@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Header } from'react-native-elements';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Home from './Home';
-import Curiosidades from './Curiosidades';
 import { createBottomTabNavigator } from'@react-navigation/bottom-tabs'
 import ChatMain from './chats/ChatMain';
 import { Icon } from'react-native-elements';

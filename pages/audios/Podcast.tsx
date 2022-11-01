@@ -44,8 +44,7 @@ export default function Podcast() {
                 <ListItem.Title>{item.title}</ListItem.Title>
             </ListItem.Content>
 
-            {/* <ListItem.Subtitle style={{ color: "grey" }}>Show on map</ListItem.Subtitle> */}
-            <ListItem.Chevron type="material"
+            <ListItem.Chevron  type="material"
                                 name="play-circle-outline"/>
 
           </ListItem>
