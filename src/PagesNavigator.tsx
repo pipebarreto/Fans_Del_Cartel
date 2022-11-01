@@ -4,12 +4,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Header } from'react-native-elements';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Home from './Home';
+import Home from './pages/Home';
 import { createBottomTabNavigator } from'@react-navigation/bottom-tabs'
 import ChatMain from './chats/ChatMain';
 import { Icon } from'react-native-elements';
 import ChatNavigator from './chats/ChatNavigator';
 import AudiosMain from './audios/AudiosMain';
+import Explorer from './audios/Explorer';
 
 
 const Tab = createBottomTabNavigator();
@@ -38,7 +39,7 @@ export default function PagesNavigator() {
             
             
       <Tab.Screen name="Home"component={Home} options={{ headerShown: false }}/>
-      <Tab.Screen name="Chat"component={ChatNavigator} options={{ headerShown: false }}/>
+      <Tab.Screen name="Chat"component={ChatNavigator} options={{ headerShown: false, tabBarHideOnKeyboard:true }}/>
       <Tab.Screen name="Audio"component={AudiosMain} options={{ headerShown: false }}/>
 
     </Tab.Navigator>

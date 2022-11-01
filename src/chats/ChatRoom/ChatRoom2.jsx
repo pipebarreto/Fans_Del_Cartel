@@ -59,6 +59,10 @@ useEffect(() => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
   }, [])*/
 
+  /*{
+    Platform.OS === 'android' && <KeyboardAvoidingView behavior="padding" />
+ }*/
+
 
   //const enviar = (props) => <Send {...props} label="Enviar" />;
 
@@ -80,9 +84,6 @@ useEffect(() => {
         name: auth.currentUser.displayName
       }}
     />
-    {
-      Platform.OS === 'android' && <KeyboardAvoidingView behavior="padding" />
-   }
     </View>
   )
 }

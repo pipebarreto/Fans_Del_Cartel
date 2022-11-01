@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native'
 import { Input, Button } from 'react-native-elements';
-import { auth } from './config/firebase';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '../../config/firebase';
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 
 const SignUp = () => {
     const [name, setName] = useState('');
@@ -15,11 +15,13 @@ const SignUp = () => {
         .then((userCredential) => {
             // Registered
             const user = userCredential.user;
+            //sendEmailVerification(user);
             updateProfile(user, {
                 displayName: name,
                 photoURL: avatar ? avatar : 'https://gravatar.com/avatar/94d45dbdba988afacf30d916e7aaad69?s=200&d=mp&r=x',
             })
             .then(() => {
+                //sendEmailVerification(user);
                 alert('Registrado con éxito! Por favor ingrese.');
             })
             .catch((error) => {

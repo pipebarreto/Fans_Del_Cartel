@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { Input, Button } from'react-native-elements';
-
 import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
 import { Icon } from'react-native-elements';
 

@@ -5,9 +5,10 @@ import { Button } from '@rneui/base';
 import { Image } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 import { signOut } from "firebase/auth";
-import { auth } from "./config/firebase";
+import { auth } from "../config/firebase";
 import RNRestart from 'react-native-restart'
 import { NativeModules } from "react-native";
+import SoundPlayer from 'react-native-sound-player'
 
 
 export default function Home ({ navigation }){
@@ -24,13 +25,21 @@ export default function Home ({ navigation }){
         });
     }
 
+  /*  try {
+
+      const test=SoundPlayer.playUrl('https://api.spreaker.com/v2/episodes/51708600/download.mp3')
+      console.log(test);
+  } catch (e) {
+      console.log(`cannot play the sound file`, e)
+  }*/
+
 
     return(
 
         <ScrollView>
 
             <View style={{ alignItems: 'center', padding:25}}>
-                <Image source={require('../images/2025.png')} style={{ width: windowWidth / 2, height: windowHeight / 4 }} height={undefined} width={undefined}/>
+                <Image source={require('../../images/2025.png')} style={{ width: windowWidth / 2, height: windowHeight / 4 }} height={undefined} width={undefined}/>
             </View>
 
             <Button title="Cerrar sesión" onPress={signOutNow} />

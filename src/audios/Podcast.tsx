@@ -2,12 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
-import TrackPlayer from 'react-native-track-player';
+import {Audio} from 'expo-av'
 
 
-export default function Podcast() {
+export default function Podcast({player}) {
     const [songs, setSongs] = useState([]);
-    
   
     useEffect(() => {
       const loadData = async () => {
@@ -37,7 +36,7 @@ export default function Podcast() {
       return (
 
         <View>
-          <ListItem style={{ margin: 2 }} onPress={() => {console.log(item.play)}} hasTVPreferredFocus={undefined} tvParallaxProperties={undefined}>
+          <ListItem style={{ margin: 2 }} onPress={() => {player({link: item.play, image:item.image, title:item.title})}} hasTVPreferredFocus={undefined} tvParallaxProperties={undefined}>
             
            <Avatar source={{uri: item.image}} />
             <ListItem.Content>
