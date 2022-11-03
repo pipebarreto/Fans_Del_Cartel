@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Alert } from "react-native";
 import { Banner, Button, TextInput } from "react-native-paper";
 //import { Icon } from "@rneui/themed";
@@ -7,6 +7,8 @@ import { Image } from 'react-native'
   
 const BannerComponent = () => {
     const [visible, setVisible] = useState(true);
+
+
 
   
     return (
@@ -19,8 +21,7 @@ const BannerComponent = () => {
                         label: "Proceed",
                         onPress: () => {
                             setVisible(false);
-                            setEmail("");
-                            setPhone("");
+
                             Alert.alert("Thanks for your Confirmation");
                         },
                     },
@@ -39,7 +40,7 @@ const BannerComponent = () => {
                     />
                   )}>
                 
-            
+            hello
                 {<Icon name="send" color ='blue' />}
             </Banner>
   
