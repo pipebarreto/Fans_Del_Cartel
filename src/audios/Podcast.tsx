@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
-import { Avatar, ListItem } from 'react-native-elements';
-
+import { Avatar, ListItem, Text } from 'react-native-elements';
+import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
 
 export default function Podcast({player}) {
     const [songs, setSongs] = useState([]);
@@ -35,12 +35,15 @@ export default function Podcast({player}) {
       return (
 
         <View>
-          <ListItem style={{ margin: 2 }} onPress={() => {player({link: item.play, image:item.image, title:item.title})}}>
+
+          <ListItem bottomDivider onPress={() => {player({link: item.play, image:item.image, title:item.title, duration: item.duration})}}>
             
            <Avatar source={{uri: item.image}} />
             <ListItem.Content>
                 <ListItem.Title>{item.title}</ListItem.Title>
+                <ListItem.Subtitle>{Math.round(item.duration/1000/60)} mimutos</ListItem.Subtitle>
             </ListItem.Content>
+            
 
             <ListItem.Chevron  type="material"
                                 name="play-circle-outline"/>
@@ -51,8 +54,12 @@ export default function Podcast({player}) {
 
     return(
         <View style={{paddingVertical:10}}>
+
+              {/*<Text h5>PODCASTS</Text>*/}
+
+          {songs=='' &&(<DialogLoading/>)}
                     
-                    <FlatList data={songs} renderItem={renderItem} />
+              <FlatList data={songs} renderItem={renderItem} />
         </View>
     )
   

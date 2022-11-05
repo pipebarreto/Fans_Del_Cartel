@@ -22,12 +22,10 @@ const Stack = createNativeStackNavigator();
 
 export default function LogInNavigator() {
 
-  return (
-
-    
+  return (    
 
       <Stack.Navigator >
-        <Stack.Screen name='Ingresar' component={LogIn} />
+        <Stack.Screen name='Ingresar' component={LogIn} options={{ headerShown: false }}/>
         <Stack.Screen name='Crear cuenta' component={SignUp} />
       </Stack.Navigator>
 

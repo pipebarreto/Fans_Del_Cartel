@@ -32,8 +32,17 @@ export default function PagesNavigator() {
             } else if (route.name === 'Audio') {  
               iconName = 'library-music';
           }              
-          return <Icon name={iconName} size={size} color={color} tvParallaxProperties={undefined}  />
-           }
+          return <Icon name={iconName} size={size} color={focused? color: "#CDF0EA"}  tvParallaxProperties={undefined}  />
+           },
+           tabBarStyle:{
+            backgroundColor:'#150050',
+            height:100,
+            
+          },
+         /* tabBarItemStyle:{
+            backgroundColor:'#150050',
+            borderRadius:10,
+          }*/
           })}>
 
             
@@ -49,16 +58,3 @@ export default function PagesNavigator() {
 
   );
 }
-
-/*const screenOptions = {
-  tabBarStyle:{
-    backgroundColor:'#150050',
-    height:100,
-    
-  },
-  tabBarItemStyle:{
-    backgroundColor:'#00ff00',
-    margin:5,
-    borderRadius:10,
-  }
-};*/

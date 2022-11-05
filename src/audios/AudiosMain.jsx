@@ -46,10 +46,11 @@ export default function AudiosMain(audios) {
         if (!playbackStatus.isLoaded) {      
            // setVisible(false);
           if (playbackStatus.error) {
-            console.log(`Encountered a fatal error during playback: ${playbackStatus.error}`);
+            Alert(`Lo sentimos. Ha ocurrido un error. : ${playbackStatus.error}`);
             // Send Expo team the error on Slack or the forums so we can help you debug!
           }
         } else {
+          //setInfo("test...")
            // setVisible(true);
       
           if (playbackStatus.isPlaying) {
@@ -58,7 +59,6 @@ export default function AudiosMain(audios) {
 
           } else {
             setInfo("Pausa")
-            console.log("pausa")
           }
       
           if (playbackStatus.isBuffering) {
@@ -89,18 +89,20 @@ export default function AudiosMain(audios) {
 
         {visible==true &&(
 
-                  <ListItem style={{ margin: 2 }} 
+                  <ListItem style={{ margin: 15 }} 
                   onPress={() => test()}>
             
                   <Avatar source={{uri: track.image}} />
        
                    <ListItem.Content>
                        <ListItem.Title>{track.title}</ListItem.Title>
+          
                        <ListItem.Subtitle>{info}</ListItem.Subtitle>
                    </ListItem.Content>
        
                    {!playing?
                    <ListItem.Chevron type="material"
+                                      size={"large"}
                                        color={"black"}
                                        name="play-arrow"
                                        style={{padding:20}}/>:
@@ -147,9 +149,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }
 });
-
-
-      /*     Audio.Sound.createAsync(
-            { uri: test },
-            { shouldPlay: true }
-          );*/

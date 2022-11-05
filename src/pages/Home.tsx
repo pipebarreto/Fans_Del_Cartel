@@ -9,6 +9,7 @@ import { auth } from "../config/firebase";
 import RNRestart from 'react-native-restart'
 import { NativeModules } from "react-native";
 import SoundPlayer from 'react-native-sound-player'
+import {  ImageBackground} from "react-native";
 
 
 export default function Home ({ navigation }){
@@ -35,20 +36,66 @@ export default function Home ({ navigation }){
 
 
     return(
-
+      <View style={{backgroundColor: 'c'}}>
         <ScrollView>
-
-            <View style={{ alignItems: 'center', padding:25}}>
-                <Image source={require('../../images/2025.png')} style={{ width: windowWidth / 2, height: windowHeight / 4 }} height={undefined} width={undefined}/>
-            </View>
-
-            <Button title="Cerrar sesión" onPress={signOutNow} />
 
   
 
         <View style={[styles.container, {width:windowWidth}]}>
         
 
+        <View >
+
+        <Card>
+        <Card.Title>¡Bienvenido!</Card.Title>
+        <Card.Divider/>
+     
+
+          <Text >¡Hola,  {auth.currentUser.displayName}! Te damos la bienvenida a la aplicación para fans del Cartel de la Mega. 
+          El Cartel de La mega es un programa de las noches en Colombia que abarca principalmente los temas de relaciones de pareja y lo paranormal.</Text>
+
+          <View style={[styles.container, {paddingTop:15}]}>
+
+          <Button  buttonStyle={{width:windowWidth/3, borderRadius: 10, /*backgroundColor: '#150050'*/}}
+            style={{paddingHorizontal:windowWidth/22}} title="Cambiar nombre" onPress={signOutNow} />
+
+          <Button buttonStyle={{width:windowWidth/3, borderRadius: 10, /*backgroundColor: '#150050'*/}}
+           style={{paddingHorizontal:windowWidth/22}} title="Cerrar sesión" onPress={signOutNow} />
+
+          </View>
+         </Card>
+         </View>
+
+         <View style={styles.item}>
+
+        <Card>
+        <Card.Title>Nuestro himno</Card.Title>
+        <Card.Divider/>
+
+
+        <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
+
+        </Card>
+        </View>
+
+        <View style={styles.item}>
+
+        <Card>
+        <Card.Title>Horario</Card.Title>
+        <Card.Divider/>
+
+
+        <Text>Escúchalos de Domingo a Jueves desde las 7pm hasta la media noche (hora Colombia).</Text>
+
+        </Card>
+        </View>
+
+       
+         </View>
+
+
+        
+
         <View style={styles.item}>
 
         <Card>
@@ -59,7 +106,7 @@ export default function Home ({ navigation }){
           <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
 
          </Card>
-         </View>
+
 
          <View style={styles.item}>
 
@@ -105,36 +152,6 @@ export default function Home ({ navigation }){
        
          </View>
 
-
-         <View style={[styles.container, {width:windowWidth}]}>
-        
-
-        <View style={styles.item}>
-
-        <Card>
-        <Card.Title>Nuestro himno</Card.Title>
-        <Card.Divider/>
-     
-
-          <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
-
-         </Card>
-         </View>
-
-         <View style={styles.item}>
-
-        <Card>
-        <Card.Title>Nuestro himno</Card.Title>
-        <Card.Divider/>
-
-
-        <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
-
-        </Card>
-        </View>
-       
-         </View>
-
          <View style={[styles.container, {width:windowWidth}]}>
         
 
@@ -151,25 +168,14 @@ export default function Home ({ navigation }){
          </Card>
          </View>
 
-         <View style={styles.item}>
-
-        <Card>
-        <Card.Title>Nuestro himno</Card.Title>
-        <Card.Divider/>
-
-
-        <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
-
-        </Card>
-        </View>
        
          </View>
-
-
 
 
 
       </ScrollView>
+      
+      </View>
     )
 }
 

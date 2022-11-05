@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Dimensions } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 import { auth } from '../../config/firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const SignUp = () => {
     const [name, setName] = useState('');
@@ -38,31 +41,29 @@ const SignUp = () => {
     return (
         <View style={styles.container}>
             <Input
-                placeholder='Ingrese su nombre'
+                placeholder='Ingresa tu nombre'
                 label='Nombre'
+                leftIcon={{ type: 'material', name: 'person' }}
                 value={name}
                 onChangeText={text => setName(text)}
             />
             <Input
-                placeholder='Ingrese su correo electrónico'
+                placeholder='Ingresa tu correo electrónico'
                 label='Correo electrónico'
+                leftIcon={{ type: 'material', name: 'email' }}
                 value={email}
                 onChangeText={text => setEmail(text)}
             />
             <Input
-                placeholder='Ingrese su clave'
+                placeholder='Ingresa tu clave'
                 label='Clave'
+                leftIcon={{ type: 'material', name: 'lock' }}
                 value={password} onChangeText={text => setPassword(text)}
                 secureTextEntry
             />
-            <Input
-                placeholder='Ingrese su imagen'
-                label='Imagen'
-                value = {avatar}
-                onChangeText={text => setAvatar(text)}
-            />
 
-            <Button title='Crear cuenta' onPress={register} style={styles.button} />
+
+            <Button title='Crear cuenta'  buttonStyle={styles.buttonStyle} style={styles.button} onPress={register} />
         </View>
     )
 }
@@ -71,12 +72,19 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         padding: 10,
-        marginTop: 100,
+        marginTop: 60,
     },
     button: {
-        width: 370,
-        marginTop: 10
+        width: windowWidth*0.9,
+        marginTop: 30,
+        
+    },
+    buttonStyle: {
+        borderRadius: 10,
+        //backgroundColor: '#150050',
+
     }
+
 });
 
 export default SignUp;

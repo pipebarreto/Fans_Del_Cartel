@@ -6,6 +6,7 @@ import PagesNavigator from './src/PagesNavigator';
 import LogInNavigator from './src/pages/login/LogInNavigator';
 import { auth, database } from './src/config/firebase';
 import React, { useState, useCallback, useEffect } from 'react'
+import BrackgroundGradient from './src/pages/BrackgroundGradient';
 
 
 const Stack = createNativeStackNavigator();
@@ -27,18 +28,22 @@ export default function App() {
 <>
   <SafeAreaProvider> 
     <Header  containerStyle={{backgroundColor:'#150050'}} centerComponent={{ text: 'FANS DEL CARTEL DE LA MEGA', style: { color: '#fff'}}} />
- 
+
     {isLoaded && (
     <NavigationContainer>
-      <Stack.Navigator >
+
+      <Stack.Navigator screenOptions={{headerShown: false }}>
         {!auth?.currentUser && (
-        <Stack.Screen name='Sign in' component={LogInNavigator} options={{ headerShown: false }}/>)}
-        <Stack.Screen name='Pages' component={PagesNavigator} options={{ headerShown: false }}/>
+        <Stack.Screen name='Sign in' component={LogInNavigator} />)}
+        <Stack.Screen name='Pages' component={PagesNavigator} />
       
       </Stack.Navigator>
+ 
     </NavigationContainer>
     )}
+
     </SafeAreaProvider>
+    
 
     </>
 

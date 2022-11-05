@@ -1,6 +1,6 @@
-import { Avatar, Card, ListItem } from 'react-native-elements';
+import { Avatar, Card, ListItem, Text } from 'react-native-elements';
 import React from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image} from 'react-native';
 
 
 export default function Streaming ({player}) {
@@ -8,7 +8,10 @@ export default function Streaming ({player}) {
     return(
 
         <View>
-          <ListItem style={{ margin: 2 }} onPress={() => {player({
+
+          {/*<Text h5>AUDIO EN VIVO</Text>*/}
+
+          <ListItem style={{ margin: 20 }} onPress={() => {player({
             link:"http://26593.live.streamtheworld.com:3690/LA_MEGA_BOGAAC.aac", 
             image:"https://files.lamega.com.rcnra-dev.com/assets/public/custom/rcnradiocross-footer/logos/logofooter.png",
             title:"LA MEGA BOGOTÁ - EN VIVO"})}} >

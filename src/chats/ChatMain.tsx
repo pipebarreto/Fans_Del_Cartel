@@ -4,6 +4,8 @@ import { ref, onValue,} from'firebase/database';
 import { Input, Button } from'react-native-elements';
 import { ListItem } from'react-native-elements';
 import { database } from '../config/firebase';
+import { Dialog } from '@rneui/themed';
+import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
 
 export default function ChatMain({navigation}) {
 
@@ -27,9 +29,10 @@ export default function ChatMain({navigation}) {
     
       const renderItem = ({ item, index }) => {
         return (
+          
 
           <View>
-            <ListItem style={{ margin: 5 }} onPress={() => navigation.navigate('Chat Room', { data: item })} hasTVPreferredFocus={undefined} tvParallaxProperties={undefined}>
+            <ListItem bottomDivider  onPress={() => navigation.navigate('Chat Room', { data: item })} hasTVPreferredFocus={undefined} tvParallaxProperties={undefined}>
 
               <ListItem.Content>
                 {item == "General" || item == "Paranormal" ?
@@ -46,13 +49,15 @@ export default function ChatMain({navigation}) {
 
     return(
 
-        <View>
+        <View>    
 
         <View style={{paddingTop:25}}>
 
         <Input label="Buscar tema" placeholder='Buscar tema...' onChangeText={text => setFiltering(text)}  value={filtering} autoCompleteType={undefined} />
 
         <View>
+          {indexes=='' &&(<DialogLoading/>)}
+
         <FlatList  style={{paddingTop:20}} data={filtered} renderItem={renderItem} keyExtractor={( index) => index.toString()}/>
         </View>
 
