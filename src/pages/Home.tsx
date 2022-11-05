@@ -10,6 +10,8 @@ import RNRestart from 'react-native-restart'
 import { NativeModules } from "react-native";
 import SoundPlayer from 'react-native-sound-player'
 import {  ImageBackground} from "react-native";
+import { Icon } from '@rneui/themed';
+//import { AdMobBanner } from "expo-ads-admob";
 
 
 export default function Home ({ navigation }){
@@ -36,141 +38,57 @@ export default function Home ({ navigation }){
 
 
     return(
-      <View style={{backgroundColor: 'c'}}>
+      <View >
         <ScrollView>
-
-  
-
-        <View style={[styles.container, {width:windowWidth}]}>
         
-
-        <View >
 
         <Card>
         <Card.Title>¡Bienvenido!</Card.Title>
         <Card.Divider/>
-     
 
-          <Text >¡Hola,  {auth.currentUser.displayName}! Te damos la bienvenida a la aplicación para fans del Cartel de la Mega. 
-          El Cartel de La mega es un programa de las noches en Colombia que abarca principalmente los temas de relaciones de pareja y lo paranormal.</Text>
+          <Text >¡Bienvenido,  {auth.currentUser.displayName}! 
+          El Cartel de La mega es un programa de las noches en Colombia que abarca principalmente los temas de relaciones de pareja y el tema paranormal.</Text>
 
           <View style={[styles.container, {paddingTop:15}]}>
 
           <Button  buttonStyle={{width:windowWidth/3, borderRadius: 10, /*backgroundColor: '#150050'*/}}
-            style={{paddingHorizontal:windowWidth/22}} title="Cambiar nombre" onPress={signOutNow} />
+            style={{paddingHorizontal:windowWidth/22}} title="Cambiar Nombre" onPress={signOutNow} />
 
           <Button buttonStyle={{width:windowWidth/3, borderRadius: 10, /*backgroundColor: '#150050'*/}}
            style={{paddingHorizontal:windowWidth/22}} title="Cerrar sesión" onPress={signOutNow} />
 
           </View>
          </Card>
-         </View>
 
-         <View style={styles.item}>
+         <Card>
+          <Card.Title>Nuestro himno</Card.Title>
+          <Card.Divider/>
+          <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
+        </Card>
 
         <Card>
-        <Card.Title>Nuestro himno</Card.Title>
-        <Card.Divider/>
+          <Card.Title>Horario  {<Icon name="today" size={"small"}/>}</Card.Title>
+          <Card.Divider/>
+          <Text >De Domingo a Jueves de 7pm hasta la media noche.</Text>
+        </Card>
 
+        <Card>
+          <Card.Title>Secciones</Card.Title>
+          <Card.Divider/>
+          <Card.Title>Cartel Normal: 7pm - 9 pm</Card.Title>
+          <Text >Quéjese, Volver al futuro, Caza infieles, Emprendimientos....</Text>
+          <Card.Title/>
+          <Card.Title>Paranormal: 9pm - 12am</Card.Title>
 
-        <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
+          <Text >Brujería, Ovni, Conspiraciones, Exorcismos, Fantasmas, Astrología, Predicciones...</Text>
 
         </Card>
-        </View>
-
-        <View style={styles.item}>
 
         <Card>
-        <Card.Title>Horario</Card.Title>
-        <Card.Divider/>
-
-
-        <Text>Escúchalos de Domingo a Jueves desde las 7pm hasta la media noche (hora Colombia).</Text>
-
+          <Card.Title>Noticias {<Icon name="article" size={"small"}/>}</Card.Title>
+          <Card.Divider/>
+          <Text >Brujería, Ovni, Conspiraciones, Exorcismos, Fantasmas, Astrología, Predicciones...</Text>
         </Card>
-        </View>
-
-       
-         </View>
-
-
-        
-
-        <View style={styles.item}>
-
-        <Card>
-        <Card.Title>Nuestro himno</Card.Title>
-        <Card.Divider/>
-     
-
-          <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
-
-         </Card>
-
-
-         <View style={styles.item}>
-
-        <Card>
-        <Card.Title>Nuestro himno</Card.Title>
-        <Card.Divider/>
-
-
-        <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
-
-        </Card>
-        </View>
-       
-         </View>
-
-
-         <View style={[styles.container, {width:windowWidth}]}>
-        
-
-        <View style={styles.item}>
-
-        <Card>
-        <Card.Title>Nuestro himno</Card.Title>
-        <Card.Divider/>
-     
-
-          <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
-
-         </Card>
-         </View>
-
-         <View style={styles.item}>
-
-        <Card>
-        <Card.Title>Nuestro himno</Card.Title>
-        <Card.Divider/>
-
-
-        <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
-
-        </Card>
-        </View>
-       
-         </View>
-
-         <View style={[styles.container, {width:windowWidth}]}>
-        
-
-        <View style={styles.item}>
-
-        <Card>
-        <Card.Title>Nuestro himno</Card.Title>
-        <Card.Divider/>
-     
-
-          <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
-          <Text >Payasiiin! Payasiin! yo soy un Payasiiin! Cuidado con los payasos, porque soy un payasin!</Text>
-
-         </Card>
-         </View>
-
-       
-         </View>
-
 
 
       </ScrollView>

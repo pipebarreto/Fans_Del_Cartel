@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Image, Dimensions } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 import { auth } from '../../config/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider } from 'firebase/auth';
 import { Overlay } from 'react-native-elements';
-import { LinearGradient } from 'expo-linear-gradient';
+import BrackgroundGradient from '../BrackgroundGradient';
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -14,6 +15,8 @@ const LogIn = ({navigation}) => {
     const [password, setPassword] = useState('');
     const [isVisible, setisVisible] = useState(false);
     const [email2, setEmail2] = useState('');
+
+    const provider = new GoogleAuthProvider();
 
     const openRegisterScreen = () => {
       navigation.navigate('Crear cuenta');
@@ -25,12 +28,24 @@ const LogIn = ({navigation}) => {
         }else{
             setisVisible(true)
         }
-      };  
+      }; 
+      
+      const sendPassword = () => {
+            sendPasswordResetEmail(auth, email2)
+                .then(()=>{alert('Se ha envíado un correo para cambiar tu contraseña. Es probable que se encuentre en Correo no deseado');
+                setisVisible(false);
+                setEmail2('');
+            })
+      }; 
 
     const signin = () => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
+            if (userCredential.user.emailVerified == false){
+                alert('Por favor verifica primero tu correo')
+            }else{
           navigation.replace('Pages');
+            }
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -39,12 +54,19 @@ const LogIn = ({navigation}) => {
         });
     };
 
+    const googleLogin = () => {
+
+}
+
+    
 
     return (
-        <LinearGradient style={styles.container} colors={['#4c669f', '#3b5998', '#192f6a']}>
 
-            <View style={{paddingBottom:25}}>
-                <Image source={require('../../../images/2025.png')} style={{ width: windowWidth / 2, height: windowHeight / 4, borderRadius:25 }} />
+        <BrackgroundGradient>
+                {/* <View style={styles.container}>*/ }
+
+            <View style={{paddingVertical:20}}>
+                <Image source={require('../../../images/2025.png')} style={{ width: windowWidth / 2, height: windowHeight / 4, borderRadius:25, opacity:"0.85" }} />
             </View>
 
             <Input
@@ -63,6 +85,7 @@ const LogIn = ({navigation}) => {
                 secureTextEntry
             />
             <Button title="Ingresar" buttonStyle={styles.buttonStyle} style={styles.button} onPress={signin} />
+            
             
 
             <Button title="¿Todavía no tienes una cuenta? Regístrate!" onPress={openRegisterScreen}
@@ -83,14 +106,11 @@ const LogIn = ({navigation}) => {
                 onChangeText={text => setEmail2(text)}/>
             </View>
 
-            <Button title="Enviar correo" buttonStyle={styles.buttonStyle} style={{paddingVertical:25}} onPress={signin} />
+            <Button title="Enviar correo" buttonStyle={styles.buttonStyle} style={{paddingVertical:25}} onPress={sendPassword} />
 
             <Button title="Cancelar" buttonStyle={styles.buttonStyle} style={{ width:windowWidth*0.9, paddingVertical:15}} onPress={openForgotPassword} />
             </Overlay>
-
-
-
-        </LinearGradient>
+            </BrackgroundGradient>
     )
 }
 const styles = StyleSheet.create({
@@ -98,7 +118,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         padding: 10,
-
+        marginTop: 20,
     },
     button: {
         width: windowWidth*0.9,

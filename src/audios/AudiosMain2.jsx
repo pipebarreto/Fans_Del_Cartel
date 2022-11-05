@@ -107,12 +107,10 @@ export default function AudiosMain2(){
     
       async function player (audio){
 
-        console.log('Loading Sound');
+        setInfo("Cargando...")
         const { sound } = await Audio.Sound.createAsync({uri: audio.link}
         );
         setSound(sound);
-    
-        console.log('Playing Sound');
         await sound.playAsync();
 
     }

@@ -3,6 +3,7 @@ import { View, StyleSheet, Dimensions } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 import { auth } from '../../config/firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
+import BrackgroundGradient from '../BrackgroundGradient';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -18,14 +19,14 @@ const SignUp = () => {
         .then((userCredential) => {
             // Registered
             const user = userCredential.user;
-            //sendEmailVerification(user);
+            sendEmailVerification(user);
             updateProfile(user, {
                 displayName: name,
-                photoURL: avatar ? avatar : 'https://gravatar.com/avatar/94d45dbdba988afacf30d916e7aaad69?s=200&d=mp&r=x',
+                //photoURL: avatar ? avatar : 'https://gravatar.com/avatar/94d45dbdba988afacf30d916e7aaad69?s=200&d=mp&r=x',
             })
             .then(() => {
                 //sendEmailVerification(user);
-                alert('Registrado con éxito! Por favor ingrese.');
+                alert('Se ha envíado un correo para verificar tu cuenta. Es probable que se encuentre en Correo no deseado.');
             })
             .catch((error) => {
                 alert(error.message);
@@ -39,8 +40,11 @@ const SignUp = () => {
     }
 
     return (
-        <View style={styles.container}>
+
+        <BrackgroundGradient>
+
             <Input
+                labelStyle={{paddingTop:35}}
                 placeholder='Ingresa tu nombre'
                 label='Nombre'
                 leftIcon={{ type: 'material', name: 'person' }}
@@ -64,7 +68,8 @@ const SignUp = () => {
 
 
             <Button title='Crear cuenta'  buttonStyle={styles.buttonStyle} style={styles.button} onPress={register} />
-        </View>
+
+        </BrackgroundGradient>
     )
 }
 const styles = StyleSheet.create({

@@ -48,22 +48,21 @@ export default function ChatMain({navigation}) {
       }       
 
     return(
+ 
 
-        <View>    
-
-        <View style={{paddingTop:25}}>
+        <View style={{paddingTop:20, flex: 1}}>
 
         <Input label="Buscar tema" placeholder='Buscar tema...' onChangeText={text => setFiltering(text)}  value={filtering} autoCompleteType={undefined} />
 
         <View>
           {indexes=='' &&(<DialogLoading/>)}
 
-        <FlatList  style={{paddingTop:20}} data={filtered} renderItem={renderItem} keyExtractor={( index) => index.toString()}/>
+        <FlatList  style={{paddingTop:15}} data={filtered} renderItem={renderItem} keyExtractor={( index) => index.toString()}/>
         </View>
 
       </View>
 
-      </View>
+
     )
 }
 

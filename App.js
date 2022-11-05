@@ -32,8 +32,8 @@ export default function App() {
     {isLoaded && (
     <NavigationContainer>
 
-      <Stack.Navigator screenOptions={{headerShown: false }}>
-        {!auth?.currentUser && (
+      <Stack.Navigator screenOptions={{headerShown: false, contentStyle:{backgroundColor:'red'}}}>
+        {!auth?.currentUser?.emailVerified && (
         <Stack.Screen name='Sign in' component={LogInNavigator} />)}
         <Stack.Screen name='Pages' component={PagesNavigator} />
       

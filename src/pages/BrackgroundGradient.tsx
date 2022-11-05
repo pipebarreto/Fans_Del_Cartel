@@ -7,7 +7,7 @@ export default function BrackgroundGradient({ children }) {
 
   return(
 
-    <LinearGradient style={styles.container} colors={['#4c669f', '#3b5998', '#192f6a']}>
+    <LinearGradient style={styles.container} colors={['white', '#D8D9CF']}>
       {children}
     </LinearGradient>
 
@@ -18,13 +18,11 @@ const styles = StyleSheet.create({
   container: {
       flex: 1,
       alignItems: 'center',
-      padding: 10,
-
+      padding: 5,
   },
   buttonStyle: {
       borderRadius: 10,
      // backgroundColor: '#150050',
-
   },
   linearGradient: {
       flex: 1,
