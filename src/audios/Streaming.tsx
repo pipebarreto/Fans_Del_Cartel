@@ -11,7 +11,7 @@ export default function Streaming ({player}) {
 
           {/*<Text h5>AUDIO EN VIVO</Text>*/}
 
-          <ListItem style={{ margin: 20 }} onPress={() => {player({
+          <ListItem onPress={() => {player({
             link:"http://26593.live.streamtheworld.com:3690/LA_MEGA_BOGAAC.aac", 
             image:"https://files.lamega.com.rcnra-dev.com/assets/public/custom/rcnradiocross-footer/logos/logofooter.png",
             title:"LA MEGA BOGOTÁ - EN VIVO"})}} >
@@ -19,6 +19,7 @@ export default function Streaming ({player}) {
            <Avatar source={{uri: "https://files.lamega.com.rcnra-dev.com/assets/public/custom/rcnradiocross-footer/logos/logofooter.png"}} />
             <ListItem.Content>
                 <ListItem.Title>LA MEGA BOGOTÁ - EN VIVO</ListItem.Title>
+                <ListItem.Subtitle>Streaming</ListItem.Subtitle>
             </ListItem.Content>
 
             {/* <ListItem.Subtitle style={{ color: "grey" }}>Show on map</ListItem.Subtitle> */}

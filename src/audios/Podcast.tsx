@@ -53,7 +53,7 @@ export default function Podcast({player}) {
     }       
 
     return(
-        <View style={{paddingVertical:10}}>
+        <View style={{paddingVertical:0}}>
 
               {/*<Text h5>PODCASTS</Text>*/}
 

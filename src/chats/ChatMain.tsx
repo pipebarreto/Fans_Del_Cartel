@@ -6,6 +6,7 @@ import { ListItem } from'react-native-elements';
 import { database } from '../config/firebase';
 import { Dialog } from '@rneui/themed';
 import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function ChatMain({navigation}) {
 
@@ -30,15 +31,15 @@ export default function ChatMain({navigation}) {
       const renderItem = ({ item, index }) => {
         return (
           
-
           <View>
-            <ListItem bottomDivider  onPress={() => navigation.navigate('Chat Room', { data: item })} hasTVPreferredFocus={undefined} tvParallaxProperties={undefined}>
+            <ListItem containerStyle={{backgroundColor:'#EAF6F6'}} underlayColor={'#150050'} topDivider  onPress={() => navigation.navigate('Chat Room', { data: item })} hasTVPreferredFocus={undefined} tvParallaxProperties={undefined}>
 
               <ListItem.Content>
                 {item == "General" || item == "Paranormal" ?
                   <ListItem.Title style={{ fontWeight: "bold", fontSize: 20 }}>{item}</ListItem.Title> :
                   <ListItem.Title>{item}</ListItem.Title>}
               </ListItem.Content>
+              
 
               {/* <ListItem.Subtitle style={{ color: "grey" }}>Show on map</ListItem.Subtitle> */}
               <ListItem.Chevron />
@@ -50,14 +51,14 @@ export default function ChatMain({navigation}) {
     return(
  
 
-        <View style={{paddingTop:20, flex: 1}}>
+        <View style={{paddingTop:20, flex: 1, backgroundColor:'white'}}>
 
         <Input label="Buscar tema" placeholder='Buscar tema...' onChangeText={text => setFiltering(text)}  value={filtering} autoCompleteType={undefined} />
 
-        <View>
+        <View style={{flex:1}}>
           {indexes=='' &&(<DialogLoading/>)}
 
-        <FlatList  style={{paddingTop:15}} data={filtered} renderItem={renderItem} keyExtractor={( index) => index.toString()}/>
+        <FlatList  data={filtered} renderItem={renderItem} keyExtractor={( index) => index.toString()}/>
         </View>
 
       </View>

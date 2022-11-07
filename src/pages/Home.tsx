@@ -8,8 +8,6 @@ import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import RNRestart from 'react-native-restart'
 import { NativeModules } from "react-native";
-import SoundPlayer from 'react-native-sound-player'
-import {  ImageBackground} from "react-native";
 import { Icon } from '@rneui/themed';
 //import { AdMobBanner } from "expo-ads-admob";
 
