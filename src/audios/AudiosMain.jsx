@@ -155,12 +155,15 @@ export default function AudiosMain(audios) {
           </View>
 
 
-          <Slider  style={{marginHorizontal:10}} value={along}  thumbTintColor={'black'}  onSlidingComplete={ (someValue) => 
+          <Slider  style={{marginHorizontal:10}} value={along}  thumbTintColor={'black'}
+                        maximumTrackTintColor={'#A2D2FF'}
+                        minimumTrackTintColor={'#150050'}  onSlidingComplete={ (someValue) => 
           //onValueChange
              {
               sound.setPositionAsync(someValue*length);
              }}/>
 
+          <Text/>
           <Text/>
           <Divider/>
 
@@ -170,7 +173,7 @@ export default function AudiosMain(audios) {
           )}
 
         {visible==false &&(
-        <Text></Text>)}
+        <Text/>)}
 
         <Streaming player={player}/>
         <Divider/>
