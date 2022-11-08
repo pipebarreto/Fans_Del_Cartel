@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Header } from'react-native-elements';
 import { SafeAreaProvider, SafeAreaView  } from 'react-native-safe-area-context';
-import PagesNavigator from './src/PagesNavigator';
+import PagesNavigator from './src/pages/PagesNavigator';
 import LogInNavigator from './src/login/LogInNavigator';
 import { auth, database } from './src/config/firebase';
 import React, { useState, useCallback, useEffect } from 'react'
