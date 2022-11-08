@@ -29,8 +29,7 @@ export default function Home ({ navigation }){
 
     return(
       <View >
-        <ScrollView>
-        
+        <ScrollView>     
 
         <Card>
         <Card.Title>¡Bienvenido!</Card.Title>
@@ -79,7 +78,6 @@ export default function Home ({ navigation }){
           <Card.Divider/>
           <Text >Brujería, Ovni, Conspiraciones, Exorcismos, Fantasmas, Astrología, Predicciones...</Text>
         </Card>
-
 
       </ScrollView>
       

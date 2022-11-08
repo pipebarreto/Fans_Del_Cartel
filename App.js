@@ -20,7 +20,6 @@ export default function App() {
     setIsLoaded(true);
   });
 
-  
   //TrackPlayer.registerPlaybackService(() => PlaybackService);
   
   return (
