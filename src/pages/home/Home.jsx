@@ -58,7 +58,7 @@ export default function Home ({ navigation }){
         <Card>
           <Card.Title>Horario  {<Icon name="today" size={"small"}/>}</Card.Title>
           <Card.Divider/>
-          <Text >De Domingo a Jueves de 7pm hasta la media noche.</Text>order the code
+          <Text >De Domingo a Jueves de 7pm hasta la media noche.</Text>
         </Card>
 
         <Card>
