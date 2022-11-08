@@ -5,7 +5,7 @@ import { Button } from '@rneui/base';
 import { Image } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 import { signOut } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth } from "../../config/firebase";
 import RNRestart from 'react-native-restart'
 import { NativeModules } from "react-native";
 import { Icon } from '@rneui/themed';
@@ -25,14 +25,6 @@ export default function Home ({ navigation }){
         }).catch((error) => {
         });
     }
-
-  /*  try {
-
-      const test=SoundPlayer.playUrl('https://api.spreaker.com/v2/episodes/51708600/download.mp3')
-      console.log(test);
-  } catch (e) {
-      console.log(`cannot play the sound file`, e)
-  }*/
 
 
     return(
@@ -67,7 +59,7 @@ export default function Home ({ navigation }){
         <Card>
           <Card.Title>Horario  {<Icon name="today" size={"small"}/>}</Card.Title>
           <Card.Divider/>
-          <Text >De Domingo a Jueves de 7pm hasta la media noche.</Text>
+          <Text >De Domingo a Jueves de 7pm hasta la media noche.</Text>order the code
         </Card>
 
         <Card>

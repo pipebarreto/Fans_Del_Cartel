@@ -10,6 +10,11 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import MessageInput from './MessageInput';
 
+
+//This component is not functional. Just for testing...
+//This component is not functional. Just for testing...
+//This component is not functional. Just for testing...
+
 export default function ChatRoom({route}) {
 
     const{ data } = route.params;

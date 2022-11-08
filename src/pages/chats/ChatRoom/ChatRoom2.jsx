@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import {  Bubble, GiftedChat } from 'react-native-gifted-chat'
 import {  View  } from 'react-native';
 import { getDatabase, push, ref, onValue, remove } from'firebase/database';
-import { auth, database } from '../../config/firebase';
+import { auth, database } from '../../../config/firebase';
 
 
 
@@ -76,7 +76,8 @@ useEffect(() => {
       onSend={messages => add(messages)}
       inverted={false}
       renderUsernameOnMessage={true}
-      initialNumToRender={15}
+      //backgroundColor={'red'}
+      //initialNumToRender={5}
       renderBubble={renderBubble}
       multiline={true}
       user={{

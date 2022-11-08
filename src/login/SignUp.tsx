@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native'
 import { Input, Button } from 'react-native-elements';
-import { auth } from '../../config/firebase';
+import { auth } from '../config/firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
-import BrackgroundGradient from '../BrackgroundGradient';
+import BrackgroundGradient from './BrackgroundGradient';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -44,27 +44,24 @@ const SignUp = () => {
         <BrackgroundGradient>
 
             <Input
-                labelStyle={{paddingTop:35}}
+                labelStyle={{ paddingTop: 35 }}
                 placeholder='Ingresa tu nombre'
                 label='Nombre'
                 leftIcon={{ type: 'material', name: 'person' }}
                 value={name}
-                onChangeText={text => setName(text)}
-            />
+                onChangeText={text => setName(text)} autoCompleteType={undefined}            />
             <Input
                 placeholder='Ingresa tu correo electrónico'
                 label='Correo electrónico'
                 leftIcon={{ type: 'material', name: 'email' }}
                 value={email}
-                onChangeText={text => setEmail(text)}
-            />
+                onChangeText={text => setEmail(text)} autoCompleteType={undefined}            />
             <Input
                 placeholder='Ingresa tu clave'
                 label='Clave'
                 leftIcon={{ type: 'material', name: 'lock' }}
                 value={password} onChangeText={text => setPassword(text)}
-                secureTextEntry
-            />
+                secureTextEntry autoCompleteType={undefined}            />
 
 
             <Button title='Crear cuenta'  buttonStyle={styles.buttonStyle} style={styles.button} onPress={register} />

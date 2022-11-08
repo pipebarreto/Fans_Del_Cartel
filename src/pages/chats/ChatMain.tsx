@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { ref, onValue,} from'firebase/database';
 import { Input, Button } from'react-native-elements';
 import { ListItem } from'react-native-elements';
-import { database } from '../config/firebase';
+import { database } from '../../config/firebase';
 import { Dialog } from '@rneui/themed';
 import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
 import LinearGradient from 'react-native-linear-gradient';

@@ -3,10 +3,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Header } from'react-native-elements';
 import { SafeAreaProvider, SafeAreaView  } from 'react-native-safe-area-context';
 import PagesNavigator from './src/PagesNavigator';
-import LogInNavigator from './src/pages/login/LogInNavigator';
+import LogInNavigator from './src/login/LogInNavigator';
 import { auth, database } from './src/config/firebase';
 import React, { useState, useCallback, useEffect } from 'react'
-import BrackgroundGradient from './src/pages/BrackgroundGradient';
+import BrackgroundGradient from './src/login/BrackgroundGradient';
 
 
 const Stack = createNativeStackNavigator();

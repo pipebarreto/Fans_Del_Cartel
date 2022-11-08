@@ -47,7 +47,6 @@ export default function AudiosMain(audios) {
           if (playbackStatus.error) {
             Alert(`Lo sentimos. Ha ocurrido un error. : ${playbackStatus.error}`);
             setVisible(false);
-            // Send Expo team the error on Slack or the forums so we can help you debug!
           }
         } else {
           setVisible(true);

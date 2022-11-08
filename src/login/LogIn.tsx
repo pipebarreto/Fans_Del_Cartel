@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, Dimensions } from 'react-native'
 import { Input, Button } from 'react-native-elements';
-import { auth } from '../../config/firebase';
+import { auth } from '../config/firebase';
 import { signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider } from 'firebase/auth';
 import { Overlay } from 'react-native-elements';
-import BrackgroundGradient from '../BrackgroundGradient';
+import BrackgroundGradient from './BrackgroundGradient';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -66,7 +66,7 @@ const LogIn = ({navigation}) => {
                 {/* <View style={styles.container}>*/ }
 
             <View style={{paddingVertical:20}}>
-                <Image source={require('../../../images/2025.png')} style={{ width: windowWidth / 2, height: windowHeight / 4, borderRadius:25, opacity:"0.85" }} />
+                <Image source={require('../../images/2025.png')} style={{ width: windowWidth / 2, height: windowHeight / 4, borderRadius:25, opacity:"0.85" }} />
             </View>
 
             <Input
@@ -74,16 +74,14 @@ const LogIn = ({navigation}) => {
                 label='Correo electrónico'
                 leftIcon={{ type: 'material', name: 'email' }}
                 value={email}
-                onChangeText={text => setEmail(text)}
-            />
+                onChangeText={text => setEmail(text)} autoCompleteType={undefined}            />
             <Input
                 placeholder='Ingresa tu clave'
                 label='Clave'
                 leftIcon={{ type: 'material', name: 'lock' }}
                 value={password}
                 onChangeText={text => setPassword(text)}
-                secureTextEntry
-            />
+                secureTextEntry autoCompleteType={undefined}            />
             <Button title="Ingresar" buttonStyle={styles.buttonStyle} style={styles.button} onPress={signin} />
             
             
@@ -99,11 +97,11 @@ const LogIn = ({navigation}) => {
 
             <View style={{paddingTop:15}}>
             <Input
-                placeholder='Ingresa tu correo electrónico'
-                label='¿Olvidaste tu clave?'
-                leftIcon={{ type: 'material', name: 'email' }}
-                value={email2}
-                onChangeText={text => setEmail2(text)}/>
+                        placeholder='Ingresa tu correo electrónico'
+                        label='¿Olvidaste tu clave?'
+                        leftIcon={{ type: 'material', name: 'email' }}
+                        value={email2}
+                        onChangeText={text => setEmail2(text)} autoCompleteType={undefined}/>
             </View>
 
             <Button title="Enviar correo" buttonStyle={styles.buttonStyle} style={{paddingVertical:25}} onPress={sendPassword} />
