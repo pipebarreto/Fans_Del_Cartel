@@ -21,6 +21,7 @@ export default function AudiosMain(audios) {
 
     const [length, setLength] = useState(0);
     const [along, setAlong] = useState(0);
+    const [stream, setStream] = useState(false);
 
     React.useEffect(() => {
         return sound? () => {
@@ -68,8 +69,13 @@ export default function AudiosMain(audios) {
             console.log("The player has just finished playing and will stop. Maybe you want to play something else")
           }
 
+          if (playbackStatus.durationMillis==undefined){
+            setStream(true)}else{
+              setStream(false)
+            }
+          }
         }
-      };}
+      };
 
   
     async function player(audios) {
@@ -140,6 +146,7 @@ export default function AudiosMain(audios) {
 
           </View>
 
+            {!stream && (
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginHorizontal:5}}>
           <View style={{flex:0.5}}> 
           <Text>{Math.floor((along*length/1000)/60,0).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:{
@@ -151,16 +158,16 @@ export default function AudiosMain(audios) {
               Math.floor((length/1000)%60,0).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})} </Text>
             </View>
 
-          </View>
+          </View>)}
 
-
+          {!stream && (
           <Slider  style={{marginHorizontal:10}} value={along}  thumbTintColor={'black'}
                         maximumTrackTintColor={'#A2D2FF'}
                         minimumTrackTintColor={'#150050'}  onSlidingComplete={ (someValue) => 
           //onValueChange
              {
               sound.setPositionAsync(someValue*length);
-             }}/>
+             }}/>)}
 
           <Text/>
           <Text/>
