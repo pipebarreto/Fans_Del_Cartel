@@ -9,6 +9,9 @@ import { auth } from "../../config/firebase";
 import RNRestart from 'react-native-restart'
 import { NativeModules } from "react-native";
 import { Icon } from '@rneui/themed';
+import { Overlay } from 'react-native-elements';
+import { useState, useEffect } from 'react';
+import { updateProfile } from 'firebase/auth';
 //import { AdMobBanner } from "expo-ads-admob";
 
 
@@ -16,6 +19,9 @@ export default function Home ({ navigation }){
 
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
+
+    const [newName, setNewName] = useState('');
+    const [isVisible, setisVisible] = useState(false);
 
     console.log(auth);
 
@@ -25,6 +31,27 @@ export default function Home ({ navigation }){
         }).catch((error) => {
         });
     }
+
+    const openUpdate = () => {
+      if (isVisible==true){
+          setisVisible(false)
+      }else{
+          setisVisible(true)
+          setNewName('');
+      }
+    }; 
+
+    const updateName=()=>{
+      updateProfile(auth.currentUser, {
+      displayName: newName, photoURL: "https://example.com/jane-q-user/profile.jpg"
+    }).then(() => {
+      // Profile updated!
+      setisVisible(false)
+    }).catch((error) => {
+      // An error occurred
+      setisVisible(false)
+    });
+  }
 
 
     return(
@@ -38,15 +65,6 @@ export default function Home ({ navigation }){
           <Text >¡Bienvenido,  {auth.currentUser.displayName}! 
           El Cartel de La mega es un programa de las noches en Colombia que abarca principalmente los temas de relaciones de pareja y el tema paranormal.</Text>
 
-          <View style={[styles.container, {paddingTop:15}]}>
-
-          <Button  buttonStyle={{width:windowWidth/3, borderRadius: 10, /*backgroundColor: '#150050'*/}}
-            style={{paddingHorizontal:windowWidth/22}} title="Cambiar Nombre" onPress={signOutNow} />
-
-          <Button buttonStyle={{width:windowWidth/3, borderRadius: 10, /*backgroundColor: '#150050'*/}}
-           style={{paddingHorizontal:windowWidth/22}} title="Cerrar sesión" onPress={signOutNow} />
-
-          </View>
          </Card>
 
          <Card>
@@ -79,7 +97,39 @@ export default function Home ({ navigation }){
           <Text >Brujería, Ovni, Conspiraciones, Exorcismos, Fantasmas, Astrología, Predicciones...</Text>
         </Card>
 
+        <Card>
+          <Card.Title>Perfil {<Icon name="person" size={"small"}/>}</Card.Title>
+          <Card.Divider/>
+
+          <View style={[styles.container, {paddingTop:0}]}>
+
+          <Button  buttonStyle={{width:windowWidth/3, borderRadius: 10, /*backgroundColor: '#150050'*/}}
+            style={{paddingHorizontal:windowWidth/22}} title="Cambiar Nombre" onPress={openUpdate} />
+
+          <Button buttonStyle={{width:windowWidth/3, borderRadius: 10, /*backgroundColor: '#150050'*/}}
+          style={{paddingHorizontal:windowWidth/22}} title="Cerrar sesión" onPress={signOutNow} />
+
+          </View>
+          
+        </Card>
+
       </ScrollView>
+
+      <Overlay isVisible={isVisible}>
+
+        <View style={{paddingTop:15}}>
+        <Input
+                    placeholder={auth.currentUser.displayName}
+                    label='Ingresa tu nuevo nombre para mostrar'
+                    leftIcon={{ type: 'material', name: 'person' }}
+                    value={newName}
+                    onChangeText={text => setNewName(text)} autoCompleteType={undefined}/>
+        </View>
+
+        <Button title="Actualizar Nombre" buttonStyle={styles.buttonStyle} style={{paddingVertical:25}} onPress={updateName} />
+
+        <Button title="Cancelar" buttonStyle={styles.buttonStyle} style={{ width:windowWidth*0.9, paddingVertical:15}} onPress={openUpdate} />
+        </Overlay>
       
       </View>
     )
@@ -92,11 +142,6 @@ const styles = StyleSheet.create({
       flexWrap: 'wrap',
     },
     item :{
-      flex: 0.5, //why this doesnt work???
-      // width: 150, //using fixed item width instead of flex: 0.5 works
-      //padding: 10,
-      //backgroundColor: 'red',
-      // flexGrow: 1,
-      // flexShrink: 0,
+      flex: 0.5
     }
   });

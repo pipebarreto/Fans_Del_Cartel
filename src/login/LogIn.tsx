@@ -66,7 +66,7 @@ const LogIn = ({navigation}) => {
                 {/* <View style={styles.container}>*/ }
 
             <View style={{paddingVertical:20}}>
-                <Image source={require('../../images/2025.png')} style={{ width: windowWidth / 2, height: windowHeight / 4, borderRadius:25, opacity:"0.85" }} />
+                <Image source={require('../../images/2025.png')} style={{ width: windowWidth / 2, height: windowHeight / 4, borderRadius:25, opacity:0.85 }} />
             </View>
 
             <Input

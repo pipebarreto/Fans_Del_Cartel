@@ -21,11 +21,10 @@ export default function AudiosMain(audios) {
 
     const [length, setLength] = useState(0);
     const [along, setAlong] = useState(0);
-    const [stream, setStream] = useState(false);
+    const [stream, setStream] = useState(true);
 
     React.useEffect(() => {
         return sound? () => {
-              console.log('Unloading Sound');
               sound.unloadAsync();
             }
           : undefined;
@@ -79,10 +78,13 @@ export default function AudiosMain(audios) {
 
   
     async function player(audios) {
-        setTrack(audios);
+      setInfo("Cargando nueva piesta...")
       const { sound } = await Audio.Sound.createAsync({uri:audios.link});
       setSound(sound);
-      sound.playAsync()
+      setTrack(audios);
+      await sound.playAsync();
+    //  setTrack(audios);
+
     }
     
   
@@ -102,31 +104,19 @@ export default function AudiosMain(audios) {
                 <ListItem.Title>{track.title}</ListItem.Title>      
                 <ListItem.Subtitle>{info}</ListItem.Subtitle>
             </ListItem.Content>
-
-          { /* {!playing?
-            <ListItem.Chevron type="material"
-                              size={"large"}
-                                color={"black"}
-                                name="play-arrow"
-                                style={{padding:20}}/>:
-                              
-                                <ListItem.Chevron type="material"
-                                color={"black"}
-                                name="pause"
-          style={{padding:20}}/>}  */}
-
           </ListItem>
       {//    <Text/>
       }
           <View style={{ flexDirection: 'row', alignItems:'center', justifyContent:'space-between'}}>
 
+          {!stream && (
           <View style={{flex:1/3}}>
           <Button type="clear" icon={{ name: "rewind-15", type:'material-community', color:'#150050', size:25}}
             buttonStyle={{borderRadius: 0, backgroundColor:'white'}}
            onPress={()=> sound.setPositionAsync((along*length)-15000)}/>
+          </View>)}
 
-          </View>
-          <View style={{flex:1/3}}>
+          <View style={!stream? {flex:1/3}: {flex:1}}>
           {!playing?
           <Button type="clear" icon={{name:"play-circle", type:'material-community', color:'#150050', size:50}}
           buttonStyle={{borderRadius: 50, backgroundColor:'white'}}
@@ -137,11 +127,12 @@ export default function AudiosMain(audios) {
           onPress={()=> playStop()}/>}  
           </View>
 
+          {!stream && (
           <View style={{flex:1/3}}>     
           <Button type="clear" size="sm" icon={{name:"fast-forward-30", type:'material-community', color:'#150050', size:25}}
           buttonStyle={{borderRadius: 0, backgroundColor:'white'}}
            onPress={()=> sound.setPositionAsync((along*length)+30000)}/>
-          </View>
+          </View>)}
 
 
           </View>
@@ -163,10 +154,11 @@ export default function AudiosMain(audios) {
           {!stream && (
           <Slider  style={{marginHorizontal:10}} value={along}  thumbTintColor={'black'}
                         maximumTrackTintColor={'#A2D2FF'}
-                        minimumTrackTintColor={'#150050'}  onSlidingComplete={ (someValue) => 
+                        minimumTrackTintColor={'#150050'}  onSlidingComplete={ async (someValue) => 
           //onValueChange
+          //onSlidingComplete
              {
-              sound.setPositionAsync(someValue*length);
+              await sound.setPositionAsync(someValue*length);
              }}/>)}
 
           <Text/>

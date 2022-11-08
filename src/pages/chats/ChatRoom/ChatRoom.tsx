@@ -8,8 +8,6 @@ import { Input, Button } from'react-native-elements';
 import { ListItem } from'react-native-elements';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
-import MessageInput from './MessageInput';
-
 
 //This component is not functional. Just for testing...
 //This component is not functional. Just for testing...
