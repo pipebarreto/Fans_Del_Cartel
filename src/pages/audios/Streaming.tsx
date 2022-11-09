@@ -14,6 +14,7 @@ export default function Streaming ({player}) {
           <ListItem onPress={() => {player({
             link:"http://26593.live.streamtheworld.com:3690/LA_MEGA_BOGAAC.aac", 
             image:"https://files.lamega.com.rcnra-dev.com/assets/public/custom/rcnradiocross-footer/logos/logofooter.png",
+            stream:true,
             title:"LA MEGA BOGOTÁ - EN VIVO"})}} >
             
            <Avatar source={{uri: "https://files.lamega.com.rcnra-dev.com/assets/public/custom/rcnradiocross-footer/logos/logofooter.png"}} />

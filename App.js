@@ -26,7 +26,7 @@ export default function App() {
 
 <>
   <SafeAreaProvider> 
-    <Header  containerStyle={{backgroundColor:'#150050'}} centerComponent={{ text: 'FANS DEL CARTEL DE LA MEGA', style: { color: '#fff'}}} />
+    <Header  containerStyle={{backgroundColor:'#150050'}} centerComponent={{ text: 'FANS DEL CARTEL', style: { color: '#fff'}}} />
 
     {isLoaded && (
     <NavigationContainer>

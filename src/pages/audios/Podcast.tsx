@@ -36,7 +36,7 @@ export default function Podcast({player}) {
 
         <View>
 
-          <ListItem bottomDivider onPress={() => {player({link: item.play, image:item.image, title:item.title, duration: item.duration})}}>
+          <ListItem bottomDivider onPress={() => {player({link: item.play, image:item.image, title:item.title, duration: item.duration, stream:false})}}>
             
            <Avatar source={{uri: item.image}} />
             <ListItem.Content>

@@ -43,7 +43,7 @@ export default function Home ({ navigation }){
 
     const updateName=()=>{
       updateProfile(auth.currentUser, {
-      displayName: newName, photoURL: "https://example.com/jane-q-user/profile.jpg"
+      displayName: newName
     }).then(() => {
       // Profile updated!
       setisVisible(false)
