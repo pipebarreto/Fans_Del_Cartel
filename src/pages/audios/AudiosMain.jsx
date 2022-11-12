@@ -26,7 +26,7 @@ export default function AudiosMain(audios) {
     React.useEffect(() => {
         return sound? () => {
               sound.unloadAsync();
-              setLength(1);
+              setLength(0);
               setAlong(0);
               //setVisible(true);
             }
@@ -58,8 +58,9 @@ export default function AudiosMain(audios) {
           if (playbackStatus.isPlaying) {
            // setInfo("Reproduciendo...")
            // console.log(playbackStatus.isPlaying)
-            
+            if(playbackStatus.durationMillis){
             setAlong(playbackStatus.positionMillis);
+            }
 
           } else {
             //setInfo("Pausa")
@@ -69,7 +70,9 @@ export default function AudiosMain(audios) {
       
           if (playbackStatus.isBuffering) {
             //setInfo("Cargando...");
+            if(playbackStatus.durationMillis){
             setLength(playbackStatus.durationMillis);
+            }
           }
       
           if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
@@ -90,8 +93,8 @@ export default function AudiosMain(audios) {
       const { sound } = await Audio.Sound.createAsync({uri:audios.link});
       setSound(sound);
       setTrack(audios);
-      await sound.playAsync();
       setPlaying(true);
+      await sound.playAsync();
     }
 
     const goalon = Math.floor(along/60000).toLocaleString('en-US', {minimumIntegerDigits: 2})+":"+
@@ -100,8 +103,8 @@ export default function AudiosMain(audios) {
       
       async function seek(number) {
         await sound.setPositionAsync(along+number);
-        const test= await sound.getStatusAsync();
-        setAlong(test.positionMillis)
+        const position = await sound.getStatusAsync();
+        setAlong(position.positionMillis)
       }
 
     return(
@@ -166,15 +169,15 @@ export default function AudiosMain(audios) {
 
           </View>)}
 
-          {/*!stream && (
-          <Slider  style={{marginHorizontal:10}} value={along/length}  thumbTintColor={'black'}
+          {!stream && (
+          <Slider  style={{marginHorizontal:10}} minimumValue={0} maximumValue={length} value={along}  thumbTintColor={'black'}
                         maximumTrackTintColor={'#A2D2FF'}
                         minimumTrackTintColor={'#150050'}  onSlidingComplete={ async (someValue) => 
           //onValueChange
           //onSlidingComplete
              {
-              await sound.setPositionAsync(someValue*length);
-             }}/>)*/}
+              await sound.setPositionAsync(someValue);
+             }}/>)}
 
           <Text/>
           <Text/>
