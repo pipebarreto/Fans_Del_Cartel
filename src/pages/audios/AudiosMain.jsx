@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState} from "react";
 import { View, Alert, SliderBase } from "react-native";
 import { Input, Button, Text, Icon, ListItem, Avatar, Divider } from'react-native-elements';
 import Podcast from "./Podcast";
@@ -19,8 +19,6 @@ export default function AudiosMain(audios) {
 
     const [playing, setPlaying] = useState(true);
 
-    let lengths=0;
-    const sounds = React.useRef(new Audio.Sound());
     const [length, setLength] = useState(1);
     const [along, setAlong] = useState(0);
     const [stream, setStream] = useState(true);
@@ -28,6 +26,8 @@ export default function AudiosMain(audios) {
     React.useEffect(() => {
         return sound? () => {
               sound.unloadAsync();
+              setLength(1);
+              setAlong(0);
               //setVisible(true);
             }
           : setVisible(false);
@@ -45,11 +45,12 @@ export default function AudiosMain(audios) {
 
 
 
-      if (sound==undefined){}else{
+      if (sound!=undefined){
       sound._onPlaybackStatusUpdate = playbackStatus => {
         if (!playbackStatus.isLoaded) {      
 
           if (playbackStatus.error) {
+            console.log("error");
             Alert(`Lo sentimos. Ha ocurrido un error. : ${playbackStatus.error}`);
 
           }
@@ -59,9 +60,11 @@ export default function AudiosMain(audios) {
            // console.log(playbackStatus.isPlaying)
             
             setAlong(playbackStatus.positionMillis);
+
           } else {
             //setInfo("Pausa")
             //setPlaying(false);
+           
           }
       
           if (playbackStatus.isBuffering) {
@@ -77,7 +80,6 @@ export default function AudiosMain(audios) {
           }
         }
       };
-
   
     async function player(audios) {
       setTrack({title:"Cargando...", image:''});
@@ -89,12 +91,18 @@ export default function AudiosMain(audios) {
       setSound(sound);
       setTrack(audios);
       await sound.playAsync();
-
+      setPlaying(true);
     }
 
-    const goalon = Math.floor((along/1000)/60,0).toLocaleString('en-US', {minimumIntegerDigits: 2})+":"+
-      Math.floor((along/1000)%60,0).toLocaleString('en-US', {minimumIntegerDigits: 2});
+    const goalon = Math.floor(along/60000).toLocaleString('en-US', {minimumIntegerDigits: 2})+":"+
+      Math.floor((along/1000)%60).toLocaleString('en-US', {minimumIntegerDigits: 2});
     
+      
+      async function seek(number) {
+        await sound.setPositionAsync(along+number);
+        const test= await sound.getStatusAsync();
+        setAlong(test.positionMillis)
+      }
 
     return(
 
@@ -121,7 +129,7 @@ export default function AudiosMain(audios) {
           <View style={{flex:1/3}}>
           <Button type="clear" icon={{ name: "rewind-15", type:'material-community', color:'#150050', size:25}}
             buttonStyle={{borderRadius: 0, backgroundColor:'white'}}
-           onPress={()=> sound.setPositionAsync(along-15000)}/>
+           onPress={async ()=> await seek(-15000)}/>
           </View>)}
 
           <View style={!stream? {flex:1/3}: {flex:1}}>
@@ -139,7 +147,7 @@ export default function AudiosMain(audios) {
           <View style={{flex:1/3}}>     
           <Button type="clear" size="sm" icon={{name:"fast-forward-30", type:'material-community', color:'#150050', size:25}}
           buttonStyle={{borderRadius: 0, backgroundColor:'white'}}
-           onPress={()=> sound.setPositionAsync(along+30000)}/>
+           onPress={async ()=> await seek(30000)}/>
           </View>)}
 
 
@@ -158,7 +166,7 @@ export default function AudiosMain(audios) {
 
           </View>)}
 
-          {!stream && (
+          {/*!stream && (
           <Slider  style={{marginHorizontal:10}} value={along/length}  thumbTintColor={'black'}
                         maximumTrackTintColor={'#A2D2FF'}
                         minimumTrackTintColor={'#150050'}  onSlidingComplete={ async (someValue) => 
@@ -166,7 +174,7 @@ export default function AudiosMain(audios) {
           //onSlidingComplete
              {
               await sound.setPositionAsync(someValue*length);
-             }}/>)}
+             }}/>)*/}
 
           <Text/>
           <Text/>

@@ -5,13 +5,16 @@ import { Button } from '@rneui/base';
 import { Image } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 import { signOut } from "firebase/auth";
-import { auth } from "../../config/firebase";
 import RNRestart from 'react-native-restart'
 import { NativeModules } from "react-native";
 import { Icon } from '@rneui/themed';
 import { Overlay } from 'react-native-elements';
 import { useState, useEffect } from 'react';
 import { updateProfile } from 'firebase/auth';
+import { getDatabase, push, ref, onValue, remove } from'firebase/database';
+import { auth, database } from '../../config/firebase';
+import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
+
 //import { AdMobBanner } from "expo-ads-admob";
 
 
@@ -22,6 +25,7 @@ export default function Home ({ navigation }){
 
     const [newName, setNewName] = useState('');
     const [isVisible, setisVisible] = useState(false);
+    const [news, setNews] = useState([]);
 
     console.log(auth);
 
@@ -40,6 +44,27 @@ export default function Home ({ navigation }){
           setNewName('');
       }
     }; 
+
+    useEffect(() => {
+      const itemsRef = ref(database, `news/`); 
+       onValue(itemsRef, (snapshot) => {
+          const data = snapshot.val();   
+          if(!data) {
+            setNews([])}        
+          else{
+            const data = snapshot.val();
+            const keys = Object.keys(data);
+            // Combine keys with data 
+            const dataWithKeys = Object.values(data).map((obj, index) => { 
+    
+              return {...obj, _id:keys[index] , title:obj.title, content:obj.content }        
+           });
+            setNews(dataWithKeys)   
+        }})
+        }, []);
+
+        console.log(news);
+  
 
     const updateName=()=>{
       updateProfile(auth.currentUser, {
@@ -91,10 +116,22 @@ export default function Home ({ navigation }){
 
         </Card>
 
+
         <Card>
           <Card.Title>Noticias {<Icon name="article" size={"small"}/>}</Card.Title>
           <Card.Divider/>
-          <Text >Brujería, Ovni, Conspiraciones, Exorcismos, Fantasmas, Astrología, Predicciones...</Text>
+          {news?
+          news.map((news, index)=>(
+              
+            <View key={index}>
+            
+            <Card.Title>{news.title}</Card.Title>
+            <Text>{news.content}</Text>
+            <Card.Title/>
+            <Card.Divider/>
+          </View>
+          )):<DialogLoading/>}
+
         </Card>
 
         <Card>

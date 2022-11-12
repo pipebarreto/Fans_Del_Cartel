@@ -26,8 +26,11 @@ export default function ChatMain({navigation}) {
 
       const filtered = indexes.filter((item)  => {
         return (Object.values(item).join('').toLowerCase().includes(filtering.toLocaleLowerCase()))})
+        /*.sort((a, b) => a == "Paranormal" ? -1 : (b == "General" ? 1 : a.localeCompare(b)))
+        .sort((a, b) => a == "General" ? -1 : (b == "Paranormal" ? 1 : a.localeCompare(b)))*/
+        .sort(function(a) { if (a == "Paranormal" ) {return -1}})
+        .sort(function(a) { if (a == "General") {return -1}})
 
-    
       const renderItem = ({ item, index }) => {
         return (
           
