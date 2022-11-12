@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { View, Alert, SliderBase } from "react-native";
 import { Input, Button, Text, Icon, ListItem, Avatar, Divider } from'react-native-elements';
 import Podcast from "./Podcast";
@@ -17,18 +17,20 @@ export default function AudiosMain(audios) {
     const [track, setTrack] = useState();
     const [sound, setSound] = useState();
 
-    const [playing, setPlaying] = useState(false);
+    const [playing, setPlaying] = useState(true);
 
+    let lengths=0;
+    const sounds = React.useRef(new Audio.Sound());
     const [length, setLength] = useState(1);
-    const [along, setAlong] = useState(1);
+    const [along, setAlong] = useState(0);
     const [stream, setStream] = useState(true);
 
     React.useEffect(() => {
         return sound? () => {
               sound.unloadAsync();
-              setVisible(false);
+              //setVisible(true);
             }
-          : undefined;
+          : setVisible(false);
       }, [sound]);
 
       function playStop(){
@@ -36,10 +38,12 @@ export default function AudiosMain(audios) {
             sound.pauseAsync();
             setPlaying(false);
         }else{
+          sound.playAsync();
             setPlaying(true);
-            sound.playAsync();
         }
       }
+
+
 
       if (sound==undefined){}else{
       sound._onPlaybackStatusUpdate = playbackStatus => {
@@ -50,15 +54,14 @@ export default function AudiosMain(audios) {
 
           }
         } else {
-          setVisible(true);
           if (playbackStatus.isPlaying) {
            // setInfo("Reproduciendo...")
-            setPlaying(true);
            // console.log(playbackStatus.isPlaying)
             
             setAlong(playbackStatus.positionMillis);
           } else {
             //setInfo("Pausa")
+            //setPlaying(false);
           }
       
           if (playbackStatus.isBuffering) {
@@ -67,6 +70,7 @@ export default function AudiosMain(audios) {
           }
       
           if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
+            setPlaying(false);
             console.log("The player has just finished playing and will stop. Maybe you want to play something else")
           }
 
@@ -76,10 +80,12 @@ export default function AudiosMain(audios) {
 
   
     async function player(audios) {
-      const { sound } = await Audio.Sound.createAsync({uri:audios.link});
+      setTrack({title:"Cargando...", image:''});
       if (audios.stream==true){
         setStream(true)
       }else{setStream(false)}
+      setVisible(true);
+      const { sound } = await Audio.Sound.createAsync({uri:audios.link});
       setSound(sound);
       setTrack(audios);
       await sound.playAsync();
@@ -119,14 +125,14 @@ export default function AudiosMain(audios) {
           </View>)}
 
           <View style={!stream? {flex:1/3}: {flex:1}}>
-          {!playing &&(
+          {!playing ?
           <Button type="clear" icon={{name:"play-circle", type:'material-community', color:'#150050', size:50}}
           buttonStyle={{borderRadius: 50, backgroundColor:'white'}}
-          onPress={()=> playStop()}/>)}  
+          onPress={()=> playStop()}/>: 
 
           <Button type="clear" icon={{name:"pause-circle", type:'material-community', color:'#150050', size:50}}
           buttonStyle={{borderRadius: 50, backgroundColor:'white'}}
-          onPress={()=> playStop()}/>
+          onPress={()=> playStop()}/>}
           </View>
 
           {!stream && (
