@@ -26,9 +26,6 @@ export default function AudiosMain(audios) {
     React.useEffect(() => {
         return sound? () => {
               sound.unloadAsync();
-              setLength(0);
-              setAlong(0);
-              //setVisible(true);
             }
           : setVisible(false);
       }, [sound]);
@@ -72,6 +69,9 @@ export default function AudiosMain(audios) {
             //setInfo("Cargando...");
             if(playbackStatus.durationMillis){
             setLength(playbackStatus.durationMillis);
+            }else{
+              setLength(0);
+              setAlong(0);
             }
           }
       

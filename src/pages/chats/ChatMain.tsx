@@ -48,6 +48,7 @@ export default function ChatMain({navigation}) {
               <ListItem.Chevron />
 
             </ListItem>
+            
           </View>);
       }       
 
