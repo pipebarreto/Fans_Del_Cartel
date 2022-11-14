@@ -60,7 +60,7 @@ const firebaseConfig = {
 
           <View > 
   
-          <ListItem style={{ margin: 1 }} hasTVPreferredFocus={undefined} tvParallaxProperties={undefined}>
+          <ListItem /*style={{ margin:  }}*/ hasTVPreferredFocus={undefined} tvParallaxProperties={undefined}>
   
             <ListItem.Content>
 
@@ -80,7 +80,7 @@ const firebaseConfig = {
 
 
           
-      <View style={{paddingTop:10, paddingHorizontal:10, flex:1}}>
+      <View style={{paddingTop:1, paddingHorizontal:10, flex:1}}>
 
       
 

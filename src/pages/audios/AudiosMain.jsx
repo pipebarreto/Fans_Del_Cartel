@@ -26,8 +26,9 @@ export default function AudiosMain(audios) {
     React.useEffect(() => {
         return sound? () => {
               sound.unloadAsync();
+              setVisible(false);
             }
-          : setVisible(false);
+          : undefined;
       }, [sound]);
 
       function playStop(){
@@ -41,10 +42,9 @@ export default function AudiosMain(audios) {
       }
 
 
-
       if (sound!=undefined){
       sound._onPlaybackStatusUpdate = playbackStatus => {
-        if (!playbackStatus.isLoaded) {      
+        if (!playbackStatus.isLoaded) {     
 
           if (playbackStatus.error) {
             console.log("error");
@@ -73,6 +73,7 @@ export default function AudiosMain(audios) {
               setLength(0);
               setAlong(0);
             }
+            setVisible(true);
           }
       
           if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
@@ -94,7 +95,7 @@ export default function AudiosMain(audios) {
       setSound(sound);
       setTrack(audios);
       setPlaying(true);
-      await sound.playAsync();
+      sound.playAsync();
     }
 
     const goalon = Math.floor(along/60000).toLocaleString('en-US', {minimumIntegerDigits: 2})+":"+

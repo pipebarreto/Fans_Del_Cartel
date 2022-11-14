@@ -1,9 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import {  Bubble, GiftedChat } from 'react-native-gifted-chat'
+import {  Bubble, GiftedChat, InputToolbar} from 'react-native-gifted-chat'
 import {  View  } from 'react-native';
 import { getDatabase, push, ref, onValue, remove } from'firebase/database';
 import { auth, database } from '../../../config/firebase';
-
 
 
 export default function ChatRoom2({route}) {
@@ -13,7 +12,7 @@ export default function ChatRoom2({route}) {
 
 
 useEffect(() => {
-  const itemsRef = ref(database, `chats/${data}`); 
+  const itemsRef = ref(database, `chats/${data}`);
    onValue(itemsRef, (snapshot) => {
       const data = snapshot.val();   
       if(!data) {
@@ -39,6 +38,7 @@ useEffect(() => {
         ref(database,  `chats/${data}`),     
         { message: message[0].text,  user:{_id: message[0].user._id, name: message[0].user.name} });
     }
+
 
     function renderBubble(props) {
       return (
@@ -72,6 +72,8 @@ useEffect(() => {
     <View style={{flex:1}}>
     <GiftedChat
     
+
+      placeholder='Escribir mensaje...'    
       messages={messages}
       onSend={messages => add(messages)}
       inverted={false}

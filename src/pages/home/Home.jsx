@@ -99,7 +99,7 @@ export default function Home ({ navigation }){
         </Card>
 
         <Card>
-          <Card.Title>Horario  {<Icon name="today" size={"small"}/>}</Card.Title>
+          <Card.Title>Horario  {<Icon name="today" size={20}/>}</Card.Title>
           <Card.Divider/>
           <Text >De Domingo a Jueves de 7pm hasta la media noche.</Text>
         </Card>
@@ -118,7 +118,7 @@ export default function Home ({ navigation }){
 
 
         <Card>
-          <Card.Title>Noticias {<Icon name="article" size={"small"}/>}</Card.Title>
+          <Card.Title>Noticias {<Icon name="article" size={20}/>}</Card.Title>
           <Card.Divider/>
           {news?
           news.map((news, index)=>(
@@ -135,7 +135,7 @@ export default function Home ({ navigation }){
         </Card>
 
         <Card>
-          <Card.Title>Perfil {<Icon name="person" size={"small"}/>}</Card.Title>
+          <Card.Title>Perfil {<Icon name="person" size={20}/>}</Card.Title>
           <Card.Divider/>
 
           <View style={[styles.container, {paddingTop:0}]}>
