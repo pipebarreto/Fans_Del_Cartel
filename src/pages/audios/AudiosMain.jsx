@@ -31,12 +31,12 @@ export default function AudiosMain(audios) {
           : undefined;
       }, [sound]);
 
-      function playStop(){
+      async function playStop(){
         if (playing==true){
-            sound.pauseAsync();
+            await sound.pauseAsync();
             setPlaying(false);
         }else{
-          sound.playAsync();
+          await sound.playAsync();
             setPlaying(true);
         }
       }
@@ -44,9 +44,11 @@ export default function AudiosMain(audios) {
 
       if (sound!=undefined){
       sound._onPlaybackStatusUpdate = playbackStatus => {
-        if (!playbackStatus.isLoaded) {     
+        if (!playbackStatus.isLoaded) {    
+           
 
           if (playbackStatus.error) {
+            setVisible(false);
             console.log("error");
             Alert(`Lo sentimos. Ha ocurrido un error. : ${playbackStatus.error}`);
 
@@ -75,27 +77,34 @@ export default function AudiosMain(audios) {
             }
             setVisible(true);
           }
-      
+
+
           if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
             setPlaying(false);
+            setVisible(false);
             console.log("The player has just finished playing and will stop. Maybe you want to play something else")
           }
 
           }
         }
       };
+
+      console.log(sound);
   
     async function player(audios) {
+    //  setSound();
       setTrack({title:"Cargando...", image:''});
       if (audios.stream==true){
         setStream(true)
       }else{setStream(false)}
-      setVisible(true);
+
+      
       const { sound } = await Audio.Sound.createAsync({uri:audios.link});
+      
       setSound(sound);
       setTrack(audios);
+      await sound.playAsync();
       setPlaying(true);
-      sound.playAsync();
     }
 
     const goalon = Math.floor(along/60000).toLocaleString('en-US', {minimumIntegerDigits: 2})+":"+
@@ -112,92 +121,92 @@ export default function AudiosMain(audios) {
 
         <View style={{flex:1, backgroundColor:"white"}}>
 
-        {visible==true &&(
-
-          <View>
-          <ListItem
-          /*onPress={() => playStop()}*/>      
-
-          <Avatar source={{uri: track.image}} />
-
-            <ListItem.Content>
-                <ListItem.Title>{track.title}</ListItem.Title>      
-{/*}                <ListItem.Subtitle>{info}</ListItem.Subtitle>*/}
-            </ListItem.Content>
-          </ListItem>
-      {//    <Text/>
-      }
-          <View style={{ flexDirection: 'row', alignItems:'center', justifyContent:'space-between'}}>
-
-          {!stream && (
-          <View style={{flex:1/3}}>
-          <Button type="clear" icon={{ name: "rewind-15", type:'material-community', color:'#150050', size:25}}
-            buttonStyle={{borderRadius: 0, backgroundColor:'white'}}
-           onPress={async ()=> await seek(-15000)}/>
-          </View>)}
-
-          <View style={!stream? {flex:1/3}: {flex:1}}>
-          {!playing ?
-          <Button type="clear" icon={{name:"play-circle", type:'material-community', color:'#150050', size:50}}
-          buttonStyle={{borderRadius: 50, backgroundColor:'white'}}
-          onPress={()=> playStop()}/>: 
-
-          <Button type="clear" icon={{name:"pause-circle", type:'material-community', color:'#150050', size:50}}
-          buttonStyle={{borderRadius: 50, backgroundColor:'white'}}
-          onPress={()=> playStop()}/>}
-          </View>
-
-          {!stream && (
-          <View style={{flex:1/3}}>     
-          <Button type="clear" size="sm" icon={{name:"fast-forward-30", type:'material-community', color:'#150050', size:25}}
-          buttonStyle={{borderRadius: 0, backgroundColor:'white'}}
-           onPress={async ()=> await seek(30000)}/>
-          </View>)}
-
-
-          </View>
-
-            {!stream && (
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginHorizontal:5}}>
-          <View style={{flex:0.5}}> 
-          <Text>{goalon} </Text>
-          </View>
-
-          <View style={{flex:0.5, position: 'absolute', right:0}}>
-          <Text >{Math.floor((length/1000)/60,0).toLocaleString('en-US', {minimumIntegerDigits: 2})}:{
-              Math.floor((length/1000)%60,0).toLocaleString('en-US', {minimumIntegerDigits: 2})} </Text>
-            </View>
-
-          </View>)}
-
-          {!stream && (
-          <Slider  style={{marginHorizontal:10}} minimumValue={0} maximumValue={length} value={along}  thumbTintColor={'black'}
-                        maximumTrackTintColor={'#A2D2FF'}
-                        minimumTrackTintColor={'#150050'}  onSlidingComplete={ async (someValue) => 
-          //onValueChange
-          //onSlidingComplete
-             {
-              await sound.setPositionAsync(someValue);
-             }}/>)}
-
-          <Text/>
-          <Text/>
-          <Divider/>
-
-          </View>
-
-          
-          )}
-
-        {visible==false &&(
-        <Text/>)}
-
         <Streaming player={player}/>
         <Divider/>
         
         <View style={{flex:1}}>
         <Podcast player={player}/>
        </View>
+
+            {visible &&(
+
+      <View style={{backgroundColor:'red'}}>
+
+        
+        <View style={{marginBottom:-10}}>
+      <ListItem containerStyle={{backgroundColor:'red'}}
+      /*onPress={() => playStop()}*/>      
+
+      <Avatar source={{uri: track.image}} />
+
+        <ListItem.Content >
+            <ListItem.Title>{track.title}</ListItem.Title>      
+      {/*}                <ListItem.Subtitle>{info}</ListItem.Subtitle>*/}
+        </ListItem.Content>
+      </ListItem>
+      </View>
+      
+      
+      <View style={stream?{ flexDirection: 'row', alignItems:'center', justifyContent:'space-between',marginBottom:20}:
+        { flexDirection: 'row', alignItems:'center', justifyContent:'space-between',marginBottom:-10}}>
+
+      {!stream && (
+      <View style={{flex:1/3}}>
+      <Button type="clear" icon={{ name: "rewind-15", type:'material-community', color:'#150050', size:30}}
+        buttonStyle={{borderRadius: 0, backgroundColor:'red'}}
+      onPress={async ()=> await seek(-15000)}/>
+      </View>)}
+
+      <View style={!stream? {flex:1/3}: {flex:1}}>
+      {!playing ?
+      <Button type="clear" icon={{name:"play-circle", type:'material-community', color:'#150050', size:50}}
+      buttonStyle={{borderRadius: 50, backgroundColor:'red'}}
+      onPress={()=> playStop()}/>: 
+
+      <Button type="clear" icon={{name:"pause-circle", type:'material-community', color:'#150050', size:50}}
+      buttonStyle={{borderRadius: 50, backgroundColor:'red'}}
+      onPress={()=> playStop()}/>}
+      </View>
+
+      {!stream && (
+      <View style={{flex:1/3}}>     
+      <Button type="clear" size="sm" icon={{name:"fast-forward-30", type:'material-community', color:'#150050', size:30}}
+      buttonStyle={{borderRadius: 0, backgroundColor:'red'}}
+      onPress={async ()=> await seek(30000)}/>
+      </View>)}
+
+
+      </View>
+
+        {!stream && (
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginHorizontal:5}}>
+      <View style={{flex:0.5}}> 
+      <Text>{goalon} </Text>
+      </View>
+
+      <View style={{flex:0.5, position: 'absolute', right:0}}>
+      <Text >{Math.floor((length/1000)/60,0).toLocaleString('en-US', {minimumIntegerDigits: 2})}:{
+          Math.floor((length/1000)%60,0).toLocaleString('en-US', {minimumIntegerDigits: 2})} </Text>
+        </View>
+
+      </View>)}
+
+      {!stream && (
+      <Slider  style={{marginHorizontal:10}} minimumValue={0} maximumValue={length} value={along}  thumbTintColor={'black'}
+                    maximumTrackTintColor={'#A2D2FF'}
+                    minimumTrackTintColor={'#150050'}  onSlidingComplete={ async (someValue) => 
+      //onValueChange
+      //onSlidingComplete
+        {
+          await sound.setPositionAsync(someValue);
+        }}/>)}
+
+      <Divider/>
+
+      </View>
+
+
+      )}
        </View>
 
     )
