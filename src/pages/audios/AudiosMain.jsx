@@ -7,7 +7,7 @@ import {Audio} from 'expo-av'
 
 import {  StyleSheet,Image,  TouchableOpacity,} from 'react-native';
 import Slider from '@react-native-community/slider';
-
+import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
 
 
 export default function AudiosMain(audios) {
@@ -16,6 +16,7 @@ export default function AudiosMain(audios) {
     const [visible, setVisible] = useState(false);
     const [track, setTrack] = useState();
     const [sound, setSound] = useState();
+    const [loading, setLoading] = useState(false);
 
     const [playing, setPlaying] = useState(true);
 
@@ -28,7 +29,7 @@ export default function AudiosMain(audios) {
               sound.unloadAsync();
               setVisible(false);
             }
-          : undefined;
+          : setVisible(true);
       }, [sound]);
 
       async function playStop(){
@@ -48,7 +49,7 @@ export default function AudiosMain(audios) {
            
 
           if (playbackStatus.error) {
-            setVisible(false);
+
             console.log("error");
             Alert(`Lo sentimos. Ha ocurrido un error. : ${playbackStatus.error}`);
 
@@ -75,13 +76,13 @@ export default function AudiosMain(audios) {
               setLength(0);
               setAlong(0);
             }
-            setVisible(true);
+
           }
 
 
           if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
             setPlaying(false);
-            setVisible(false);
+       //     setVisible(false);
             console.log("The player has just finished playing and will stop. Maybe you want to play something else")
           }
 
@@ -89,18 +90,17 @@ export default function AudiosMain(audios) {
         }
       };
 
-      console.log(sound);
   
     async function player(audios) {
-    //  setSound();
+      setSound();
+      setLoading(true);
       setTrack({title:"Cargando...", image:''});
       if (audios.stream==true){
         setStream(true)
       }else{setStream(false)}
-
       
       const { sound } = await Audio.Sound.createAsync({uri:audios.link});
-      
+      setLoading(false);
       setSound(sound);
       setTrack(audios);
       await sound.playAsync();
@@ -127,6 +127,10 @@ export default function AudiosMain(audios) {
         <View style={{flex:1}}>
         <Podcast player={player}/>
        </View>
+
+       {/*loading &&(
+        <DialogLoading/> 
+       )*/}
 
             {visible &&(
 
@@ -201,7 +205,6 @@ export default function AudiosMain(audios) {
           await sound.setPositionAsync(someValue);
         }}/>)}
 
-      <Divider/>
 
       </View>
 
