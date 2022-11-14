@@ -14,7 +14,7 @@ export default function AudiosMain(audios) {
     Audio.setAudioModeAsync({ playsInSilentModeIOS: true, staysActiveInBackground: true, shouldDuckAndroid:true });
 
     const [visible, setVisible] = useState(false);
-    const [track, setTrack] = useState();
+    const [track, setTrack] = useState({image:''});
     const [sound, setSound] = useState();
     const [loading, setLoading] = useState(false);
 
@@ -29,7 +29,7 @@ export default function AudiosMain(audios) {
               sound.unloadAsync();
               setVisible(false);
             }
-          : setVisible(true);
+          : undefined;
       }, [sound]);
 
       async function playStop(){
@@ -70,6 +70,8 @@ export default function AudiosMain(audios) {
       
           if (playbackStatus.isBuffering) {
             //setInfo("Cargando...");
+            setLoading(false);
+            setVisible(true)
             if(playbackStatus.durationMillis){
             setLength(playbackStatus.durationMillis);
             }else{
@@ -94,13 +96,12 @@ export default function AudiosMain(audios) {
     async function player(audios) {
       setSound();
       setLoading(true);
-      setTrack({title:"Cargando...", image:''});
+      //setTrack({title:"Cargando...", image:''});
       if (audios.stream==true){
         setStream(true)
       }else{setStream(false)}
       
       const { sound } = await Audio.Sound.createAsync({uri:audios.link});
-      setLoading(false);
       setSound(sound);
       setTrack(audios);
       await sound.playAsync();
@@ -128,9 +129,9 @@ export default function AudiosMain(audios) {
         <Podcast player={player}/>
        </View>
 
-       {/*loading &&(
+       {loading &&(
         <DialogLoading/> 
-       )*/}
+       )}
 
             {visible &&(
 
