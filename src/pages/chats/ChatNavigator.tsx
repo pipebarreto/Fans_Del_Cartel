@@ -15,7 +15,7 @@ export default function ChatNavigator() {
 
         <Stack.Navigator>
             <Stack.Screen name="Temas"component={ChatMain} options={{ headerShown: false }}/>
-            <Stack.Screen name="Chat Room" component={ChatRoom2}  />
+            <Stack.Screen name="Chat Room" component={ChatRoom}  />
         </Stack.Navigator>
  
     );

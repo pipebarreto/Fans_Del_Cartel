@@ -20,9 +20,6 @@ import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
 
 export default function Home ({ navigation }){
 
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
-
     const [newName, setNewName] = useState('');
     const [isVisible, setisVisible] = useState(false);
     const [news, setNews] = useState([]);
@@ -99,13 +96,7 @@ export default function Home ({ navigation }){
         </Card>
 
         <Card>
-          <Card.Title>Horario  {<Icon name="today" size={20}/>}</Card.Title>
-          <Card.Divider/>
-          <Text >De Domingo a Jueves de 7pm hasta la media noche.</Text>
-        </Card>
-
-        <Card>
-          <Card.Title>Secciones</Card.Title>
+        <Card.Title>Horario  {<Icon name="today" size={20}/>}</Card.Title>
           <Card.Divider/>
           <Card.Title>Cartel Normal: 7pm - 9 pm</Card.Title>
           <Text >Quéjese, Volver al futuro, Caza infieles, Emprendimientos....</Text>
@@ -140,12 +131,15 @@ export default function Home ({ navigation }){
 
           <View style={[styles.container, {paddingTop:0}]}>
 
-          <Button  buttonStyle={{width:windowWidth/3, borderRadius: 10, /*backgroundColor: '#150050'*/}}
-            style={{paddingHorizontal:windowWidth/22}} title="Cambiar Nombre" onPress={openUpdate} />
+          <View style={styles.item}>
+          <Button  buttonStyle={{ borderRadius: 5, /*backgroundColor: '#150050'*/}}
+            title="Cambiar Nombre" onPress={openUpdate} />
+          </View>
 
-          <Button buttonStyle={{width:windowWidth/3, borderRadius: 10, /*backgroundColor: '#150050'*/}}
-          style={{paddingHorizontal:windowWidth/22}} title="Cerrar sesión" onPress={signOutNow} />
-
+          <View style={styles.item}>
+          <Button buttonStyle={{borderRadius: 5, /*backgroundColor: '#150050'*/}}
+            title="Cerrar sesión" onPress={signOutNow} />
+          </View>
           </View>
           
         </Card>
@@ -165,7 +159,7 @@ export default function Home ({ navigation }){
 
         <Button title="Actualizar Nombre" buttonStyle={styles.buttonStyle} style={{paddingVertical:25}} onPress={updateName} />
 
-        <Button title="Cancelar" buttonStyle={styles.buttonStyle} style={{ width:windowWidth*0.9, paddingVertical:15}} onPress={openUpdate} />
+        <Button title="Cancelar" buttonStyle={styles.buttonStyle} style={{ paddingVertical:15}} onPress={openUpdate} />
         </Overlay>
       
       </View>
@@ -177,8 +171,10 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
       flexWrap: 'wrap',
+      justifyContent:  'space-between'
     },
     item :{
-      flex: 0.5
+      flex: 0.5,
+      paddingHorizontal:5
     }
   });
