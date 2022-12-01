@@ -27,24 +27,29 @@ export default function App() {
   return (
 
 <>
-  <SafeAreaProvider> 
+    <SafeAreaProvider>
     <Header  containerStyle={{backgroundColor:'#150050'}} centerComponent={{ text: 'FANS DEL CARTEL', style: { color: '#fff'}}} />
-
+      
     {isLoaded && (
     <NavigationContainer>
 
       <Stack.Navigator screenOptions={{headerShown: false, contentStyle:{backgroundColor:'red'}}}>
-        {!auth?.currentUser?.emailVerified && (
-        <Stack.Screen name='Sign in' component={LogInNavigator} />)}
+        
+        {!auth?.currentUser?.emailVerified ?
+          <>
+        <Stack.Screen name='Sign in' component={LogInNavigator} />
         <Stack.Screen name='Pages' component={PagesNavigator} />
+        </>:
+        <>
+        <Stack.Screen name='Pages' component={PagesNavigator} />
+        <Stack.Screen name='Sign in' component={LogInNavigator} />
+        </>}
       
       </Stack.Navigator>
  
     </NavigationContainer>
     )}
-
     </SafeAreaProvider>
-    
 
     </>
 

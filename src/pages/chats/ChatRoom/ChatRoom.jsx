@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {  Bubble, GiftedChat, InputToolbar } from 'react-native-gifted-chat'
-import {  View } from 'react-native';
+import {  View, Text } from 'react-native';
 import { push, ref, onValue, query, limitToLast } from'firebase/database';
 import { auth, database } from '../../../config/firebase';
 
@@ -10,10 +10,10 @@ export default function ChatRoom2({route}) {
   const{ data } = route.params;
 
 useEffect(() => {
-  const itemsRef = query(ref(database, `chats/${data}`), limitToLast(35));
+  const itemsRef = query(ref(database, `chats/${data}`), limitToLast(50));
 
    onValue(itemsRef, (snapshot) => {
-      const data = snapshot.val();   
+      const data = snapshot.val();
       if(!data) {
         setMessages([])}        
       else{
@@ -64,11 +64,10 @@ useEffect(() => {
 }
           
 
-  return ({
-    headerTitle: 'Normal Page'},
-    <View style={{flex:1, backgroundColor:'#EAF6F6'}}>
+  return (
+    <View style={{flex:1, backgroundColor:'#EAF6F6', paddingTop:10}}>
     <GiftedChat
-  
+      
       renderChatFooter={renderChatFooter}
       renderInputToolbar={renderInputToolbar} 
       label='Enviar'
@@ -77,7 +76,7 @@ useEffect(() => {
       onSend={messages => add(messages)}
       inverted={false}
       renderUsernameOnMessage
-      //initialNumToRender={5}
+      initialNumToRender={5}
       renderBubble={renderBubble}
       multiline={true}
       user={{

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View  } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Header } from'react-native-elements';
@@ -13,7 +13,6 @@ import AudiosMain from './audios/AudiosMain';
 
 
 const Tab = createBottomTabNavigator();
-
 
 
 export default function PagesNavigator() {

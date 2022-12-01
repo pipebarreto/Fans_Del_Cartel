@@ -117,6 +117,8 @@ export default function AudiosMain() {
         setAlong(position.positionMillis)
       }
 
+    const color ="#7187a4";
+
     return(
 
         <View style={{flex:1, backgroundColor:"white"}}>
@@ -134,11 +136,11 @@ export default function AudiosMain() {
 
             {visible &&(
 
-      <View style={{backgroundColor:'yellow'}}>
+      <View style={{backgroundColor:color}}>
 
         
         <View style={{marginBottom:-10}}>
-      <ListItem containerStyle={{backgroundColor:'yellow'}}
+      <ListItem containerStyle={{backgroundColor:color}}
       /*onPress={() => playStop()}*/>      
 
       <Avatar source={{uri: track.image}} />
@@ -157,25 +159,25 @@ export default function AudiosMain() {
       {!stream && (
       <View style={{flex:1/3}}>
       <Button type="clear" icon={{ name: "rewind-15", type:'material-community', color:'#150050', size:30}}
-        buttonStyle={{borderRadius: 0, backgroundColor:'yellow'}}
+        buttonStyle={{borderRadius: 0, backgroundColor:color}}
       onPress={async ()=> await seek(-15000)}/>
       </View>)}
 
       <View style={!stream? {flex:1/3}: {flex:1}}>
       {!playing ?
       <Button type="clear" icon={{name:"play-circle", type:'material-community', color:'#150050', size:50}}
-      buttonStyle={{borderRadius: 50, backgroundColor:'yellow'}}
+      buttonStyle={{borderRadius: 50, backgroundColor:color}}
       onPress={()=> playStop()}/>: 
 
       <Button type="clear" icon={{name:"pause-circle", type:'material-community', color:'#150050', size:50}}
-      buttonStyle={{borderRadius: 50, backgroundColor:'yellow'}}
+      buttonStyle={{borderRadius: 50, backgroundColor:color}}
       onPress={()=> playStop()}/>}
       </View>
 
       {!stream && (
       <View style={{flex:1/3}}>     
       <Button type="clear" size="sm" icon={{name:"fast-forward-30", type:'material-community', color:'#150050', size:30}}
-      buttonStyle={{borderRadius: 0, backgroundColor:'yellow'}}
+      buttonStyle={{borderRadius: 0, backgroundColor:color}}
       onPress={async ()=> await seek(30000)}/>
       </View>)}
 
@@ -196,6 +198,7 @@ export default function AudiosMain() {
       </View>)}
 
       {!stream && (
+      <>
       <Slider  style={{marginHorizontal:10}} minimumValue={0} maximumValue={length} value={along}  thumbTintColor={'black'}
                     maximumTrackTintColor={'#A2D2FF'}
                     minimumTrackTintColor={'#150050'}  onSlidingComplete={ async (someValue) => 
@@ -203,11 +206,11 @@ export default function AudiosMain() {
       //onSlidingComplete
         {
           await sound.setPositionAsync(someValue);
-        }}/>)}
-
+        }}/>
+        <Text/>
+        </>)}
 
       </View>
-
 
       )}
        </View>

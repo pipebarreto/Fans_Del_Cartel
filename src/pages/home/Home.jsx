@@ -1,12 +1,10 @@
 import React from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
-import { Card, Input, Text } from'react-native-elements';
-import { Button } from '@rneui/base';
+import { Card, Input, Text, Button } from'react-native-elements';
 import { Image } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 import { signOut } from "firebase/auth";
 import RNRestart from 'react-native-restart'
-import { NativeModules } from "react-native";
 import { Icon } from '@rneui/themed';
 import { Overlay } from 'react-native-elements';
 import { useState, useEffect } from 'react';
@@ -14,6 +12,7 @@ import { updateProfile } from 'firebase/auth';
 import { getDatabase, push, ref, onValue, remove } from'firebase/database';
 import { auth, database } from '../../config/firebase';
 import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
+
 
 //import { AdMobBanner } from "expo-ads-admob";
 
@@ -24,11 +23,9 @@ export default function Home ({ navigation }){
     const [isVisible, setisVisible] = useState(false);
     const [news, setNews] = useState([]);
 
-    console.log(auth);
-
     const signOutNow = () => {
         signOut(auth).then(() => {
-           NativeModules.DevSettings.reload();
+          navigation.push('Sign in')
         }).catch((error) => {
         });
     }
@@ -109,7 +106,7 @@ export default function Home ({ navigation }){
 
 
         <Card>
-          <Card.Title>Noticias {<Icon name="article" size={20}/>}</Card.Title>
+          <Card.Title>Noticias {<Icon name="article" size={20} />}</Card.Title>
           <Card.Divider/>
           {news?
           news.map((news, index)=>(
@@ -126,21 +123,14 @@ export default function Home ({ navigation }){
         </Card>
 
         <Card>
-          <Card.Title>Perfil {<Icon name="person" size={20}/>}</Card.Title>
+          <Card.Title>Perfil {<Icon name= "account-edit" type='material-community'
+          onPress={openUpdate} size={20} color={"blue"}/>}
+          
+          </Card.Title>
           <Card.Divider/>
 
-          <View style={[styles.container, {paddingTop:0}]}>
-
-          <View style={styles.item}>
-          <Button  buttonStyle={{ borderRadius: 5, /*backgroundColor: '#150050'*/}}
-            title="Cambiar Nombre" onPress={openUpdate} />
-          </View>
-
-          <View style={styles.item}>
           <Button buttonStyle={{borderRadius: 5, /*backgroundColor: '#150050'*/}}
             title="Cerrar sesión" onPress={signOutNow} />
-          </View>
-          </View>
           
         </Card>
 
@@ -155,11 +145,15 @@ export default function Home ({ navigation }){
                     leftIcon={{ type: 'material', name: 'person' }}
                     value={newName}
                     onChangeText={text => setNewName(text)} autoCompleteType={undefined}/>
+                    
         </View>
 
-        <Button title="Actualizar Nombre" buttonStyle={styles.buttonStyle} style={{paddingVertical:25}} onPress={updateName} />
-
-        <Button title="Cancelar" buttonStyle={styles.buttonStyle} style={{ paddingVertical:15}} onPress={openUpdate} />
+        <View style={{paddingVertical:5}}>
+        <Button title="Actualizar Nombre" onPress={updateName} />
+        </View>
+        <View style={{paddingVertical:15}}>
+        <Button title="Cancelar"  onPress={openUpdate} />
+        </View>
         </Overlay>
       
       </View>

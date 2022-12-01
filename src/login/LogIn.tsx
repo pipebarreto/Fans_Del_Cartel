@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, Image, Dimensions, Alert } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 import { auth } from '../config/firebase';
 import { signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider } from 'firebase/auth';
@@ -16,8 +16,6 @@ const LogIn = ({navigation}) => {
     const [isVisible, setisVisible] = useState(false);
     const [email2, setEmail2] = useState('');
 
-    const provider = new GoogleAuthProvider();
-
     const openRegisterScreen = () => {
       navigation.navigate('Crear cuenta');
     };
@@ -33,33 +31,25 @@ const LogIn = ({navigation}) => {
       
       const sendPassword = () => {
             sendPasswordResetEmail(auth, email2)
-                .then(()=>{alert('Se ha envíado un correo para cambiar tu contraseña. Es probable que se encuentre en Correo no deseado');
+                .finally(()=>{ Alert.alert('En caso de que se encuentre registrado, se habrá envíado un correo para cambiar contraseña.\n Recuerda que es probable que se encuentre en correo no deseado');
                 setisVisible(false);
-                setEmail2('');
-            })
+                setEmail2('');})
       }; 
 
     const signin = () => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             if (userCredential.user.emailVerified == false){
-                alert('Por favor verifica primero tu correo')
+                Alert.alert('Por favor verifica primero tu correo. .\n Recuerda que puede encontrarse en correo no deseado')
             }else{
           navigation.replace('Pages');
             }
         })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          alert(errorMessage);
+        .catch(() => {
+          Alert.alert("Ha ocurrido un error", "Verifica que tu correo y contraseña sean correctas");
         });
     };
-
-    const googleLogin = () => {
-
-}
-
-    
+   
 
     return (
 
@@ -67,7 +57,7 @@ const LogIn = ({navigation}) => {
                 {/* <View style={styles.container}>*/ }
 
             <View style={{paddingVertical:20}}>
-                <Image source={require('../../images/2025.png')} style={{ width: windowWidth / 2, height: windowHeight / 4, borderRadius:25, opacity:0.85 }} />
+                <Image source={require('../../images/2025.png')} style={{ width: windowWidth / 1.8, height: windowHeight / 4, borderRadius:25, opacity:0.95 }} />
             </View>
 
             <Input
@@ -105,9 +95,9 @@ const LogIn = ({navigation}) => {
                         onChangeText={text => setEmail2(text)} autoCompleteType={undefined}/>
             </View>
 
-            <Button title="Enviar correo" buttonStyle={styles.buttonStyle} style={{paddingVertical:25}} onPress={sendPassword} />
+            <Button title="Enviar correo"  buttonStyle={[styles.button, {marginVertical:5}]} onPress={sendPassword} />
 
-            <Button title="Cancelar" buttonStyle={styles.buttonStyle} style={{ width:windowWidth*0.9, paddingVertical:15}} onPress={openForgotPassword} />
+            <Button title="Cancelar" buttonStyle={[styles.button, {marginVertical:15}]} onPress={openForgotPassword} />
             </Overlay>
             </BrackgroundGradient>
     )

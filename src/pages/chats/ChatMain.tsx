@@ -14,7 +14,7 @@ export default function ChatMain({navigation}) {
   const [filtering, setFiltering] = useState('');
 
        useEffect(() => {
-        onValue(ref(database, 'chats/'), (snapshot) => {
+        onValue(ref(database, 'temas/'), (snapshot) => {
           const data = snapshot.val();
           if(!data) {
           setIndexes([]);    
@@ -23,10 +23,6 @@ export default function ChatMain({navigation}) {
           }
         })
       }, []);
-
-      useEffect(()=>{
-        navigation.setOptions({ title: "Title"})
-    },[])
 
       const filtered = indexes.filter((item)  => {
         return (Object.values(item).join('').toLowerCase().includes(filtering.toLocaleLowerCase()))})
