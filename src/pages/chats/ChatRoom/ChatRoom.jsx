@@ -1,16 +1,13 @@
-import React, { useState, useCallback, useEffect } from 'react'
-import {  Bubble, GiftedChat, InputToolbar} from 'react-native-gifted-chat'
-import {  View  } from 'react-native';
-import { getDatabase, push, ref, onValue, remove, query, limitToLast } from'firebase/database';
+import React, { useState, useEffect } from 'react'
+import {  Bubble, GiftedChat, InputToolbar } from 'react-native-gifted-chat'
+import {  View } from 'react-native';
+import { push, ref, onValue, query, limitToLast } from'firebase/database';
 import { auth, database } from '../../../config/firebase';
-
 
 export default function ChatRoom2({route}) {
   const [messages, setMessages] = useState([]);
 
   const{ data } = route.params;
-
-
 
 useEffect(() => {
   const itemsRef = query(ref(database, `chats/${data}`), limitToLast(35));
@@ -42,45 +39,44 @@ useEffect(() => {
     }
 
 
-    function renderBubble(props) {
-      return (
-          <Bubble
-              {...props}
-              wrapperStyle={{
-                left: {
-                  backgroundColor: '#d3d3d3',
-                },
-              }}
-          />);}
+  function renderBubble(props) {
+    return (
+        <Bubble
+            {...props}
+            wrapperStyle={{
+              left: {
+                backgroundColor: '#d3d3d3',
+              },
+            }}
+        />);}
+        
+  function renderInputToolbar (props) {
+    return <InputToolbar {...props} containerStyle={{
+      borderRadius:25,
+      borderTopColor:'black',
+    }}/>
+  }
 
+  const renderChatFooter = () => {
+    return(
+      <View style={{height:10}}></View>
+    )
+}
+          
 
- /* const onSend = useCallback((messages = []) => {
-    push(    
-      ref(database,  `chats/${data}`),     
-      { messages});
-    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-  }, [])*/
-
-  /*{
-    Platform.OS === 'android' && <KeyboardAvoidingView behavior="padding" />
- }*/
-
-
-  //const enviar = (props) => <Send {...props} label="Enviar" />;
-
-
-  return (
-
-    <View style={{flex:1}}>
+  return ({
+    headerTitle: 'Normal Page'},
+    <View style={{flex:1, backgroundColor:'#EAF6F6'}}>
     <GiftedChat
-    
-
-      placeholder='Escribir mensaje...'    
+  
+      renderChatFooter={renderChatFooter}
+      renderInputToolbar={renderInputToolbar} 
+      label='Enviar'
+      placeholder='Escribir mensaje...'
       messages={messages}
       onSend={messages => add(messages)}
       inverted={false}
-      renderUsernameOnMessage={true}
-      //backgroundColor={'red'}
+      renderUsernameOnMessage
       //initialNumToRender={5}
       renderBubble={renderBubble}
       multiline={true}

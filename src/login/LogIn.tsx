@@ -24,7 +24,8 @@ const LogIn = ({navigation}) => {
 
     const openForgotPassword = () => {
         if (isVisible==true){
-            setisVisible(false)
+            setisVisible(false);
+            setEmail2('');
         }else{
             setisVisible(true)
         }

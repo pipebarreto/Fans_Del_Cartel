@@ -24,6 +24,10 @@ export default function ChatMain({navigation}) {
         })
       }, []);
 
+      useEffect(()=>{
+        navigation.setOptions({ title: "Title"})
+    },[])
+
       const filtered = indexes.filter((item)  => {
         return (Object.values(item).join('').toLowerCase().includes(filtering.toLocaleLowerCase()))})
         /*.sort((a, b) => a == "Paranormal" ? -1 : (b == "General" ? 1 : a.localeCompare(b)))
@@ -35,7 +39,8 @@ export default function ChatMain({navigation}) {
         return (
           
           <View>
-            <ListItem containerStyle={{backgroundColor:'#EAF6F6'}} underlayColor={'#150050'} topDivider  onPress={() => navigation.navigate('Chat Room', { data: item })} hasTVPreferredFocus={undefined} tvParallaxProperties={undefined}>
+            <ListItem containerStyle={{backgroundColor:'#EAF6F6'}} underlayColor={'#150050'} topDivider
+              onPress={() => navigation.navigate('Chat Room', { data: item, name:item })} >
 
               <ListItem.Content>
                 {item == "General" || item == "Paranormal" ?
