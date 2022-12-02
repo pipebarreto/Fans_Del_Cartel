@@ -42,9 +42,9 @@ const SignUp = () => {
     return (
 
         <BrackgroundGradient>
-
+          <View style={styles.container}>
             <Input
-                labelStyle={{ paddingTop: 35 }}
+                labelStyle={{ paddingTop: 0 }}
                 placeholder='Ingresa tu nombre'
                 label='Nombre'
                 leftIcon={{ type: 'material', name: 'person' }}
@@ -65,16 +65,17 @@ const SignUp = () => {
 
 
             <Button title='Crear cuenta'  buttonStyle={styles.buttonStyle} style={styles.button} onPress={register} />
-
+            </View>  
         </BrackgroundGradient>
     )
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
         alignItems: 'center',
-        padding: 10,
-        marginTop: 60,
+        width:'100%',
+        marginBottom: 150,
     },
     button: {
         width: windowWidth*0.9,

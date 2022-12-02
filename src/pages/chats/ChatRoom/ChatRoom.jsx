@@ -52,8 +52,8 @@ useEffect(() => {
         
   function renderInputToolbar (props) {
     return <InputToolbar {...props} containerStyle={{
-      borderRadius:25,
-      borderTopColor:'black',
+      borderRadius:15,
+      backgroundColor:'white'
     }}/>
   }
 
@@ -63,11 +63,10 @@ useEffect(() => {
     )
 }
           
-
   return (
-    <View style={{flex:1, backgroundColor:'#EAF6F6', paddingTop:10}}>
+    <View style={{flex:1, backgroundColor:'#EAF6F6', paddingVertical:10}}>
     <GiftedChat
-      
+      wrapInSafeArea={false}
       renderChatFooter={renderChatFooter}
       renderInputToolbar={renderInputToolbar} 
       label='Enviar'
@@ -78,12 +77,12 @@ useEffect(() => {
       renderUsernameOnMessage
       initialNumToRender={5}
       renderBubble={renderBubble}
-      multiline={true}
       user={{
         _id: auth.currentUser.uid,
         name: auth.currentUser.displayName
       }}
     />
     </View>
+
   )
 }

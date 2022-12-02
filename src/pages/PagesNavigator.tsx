@@ -45,7 +45,7 @@ export default function PagesNavigator() {
 
             
             
-      <Tab.Screen name="Home"component={Home} options={{ headerShown: false }}/>
+      <Tab.Screen name="Home"component={Home} options={{ headerShown: false}}/>
       <Tab.Screen name="Chat"component={ChatNavigator} options={{ headerShown: false, tabBarHideOnKeyboard:true }}/>
       <Tab.Screen name="Audio"component={AudiosMain} options={{ headerShown: false }}/>
 

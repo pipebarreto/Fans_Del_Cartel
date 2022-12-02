@@ -7,7 +7,7 @@ export default function BrackgroundGradient({ children }) {
 
   return(
 
-    <LinearGradient style={styles.container} colors={['pink', 'white', '#7187a4']}>
+    <LinearGradient style={styles.container} colors={['#7187a4', 'white', 'white','white','white','#7187a4']}>
       {children}
     </LinearGradient>
 
