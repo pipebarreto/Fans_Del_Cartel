@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native'
+import { View, StyleSheet, Dimensions, Alert } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 import { auth } from '../config/firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 import BrackgroundGradient from './BrackgroundGradient';
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 const SignUp = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [avatar, setAvatar] = useState('');
 
     const register = () => {
-      createUserWithEmailAndPassword(auth, email, password)
+      createUserWithEmailAndPassword(auth, email.trim(), password.trim())
         .then((userCredential) => {
             // Registered
             const user = userCredential.user;
@@ -29,13 +27,11 @@ const SignUp = () => {
                 alert('Se ha envíado un correo para verificar tu cuenta. Es probable que se encuentre en Correo no deseado.');
             })
             .catch((error) => {
-                alert(error.message);
+                alert("ha ocurrido un error");
             })
         })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage);
+        .catch(() => {
+            Alert.alert("Ha ocurrido un error. \n Es probale que la información ingresada no sea válida");
         });
     }
 
@@ -45,7 +41,7 @@ const SignUp = () => {
           <View style={styles.container}>
             <Input
                 labelStyle={{ paddingTop: 0 }}
-                placeholder='Ingresa tu nombre'
+                placeholder='Ingresa tu nombre para mostrar'
                 label='Nombre'
                 leftIcon={{ type: 'material', name: 'person' }}
                 value={name}

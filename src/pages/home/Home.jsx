@@ -1,15 +1,13 @@
 import React from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
 import { Card, Input, Text, Button } from'react-native-elements';
-import { Image } from 'react-native-elements';
-import { Dimensions } from 'react-native';
 import { signOut } from "firebase/auth";
 import RNRestart from 'react-native-restart'
 import { Icon } from '@rneui/themed';
 import { Overlay } from 'react-native-elements';
 import { useState, useEffect } from 'react';
 import { updateProfile } from 'firebase/auth';
-import { getDatabase, push, ref, onValue, remove } from'firebase/database';
+import {  ref, onValue} from'firebase/database';
 import { auth, database } from '../../config/firebase';
 import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
 
@@ -25,7 +23,7 @@ export default function Home ({ navigation }){
 
     const signOutNow = () => {
         signOut(auth).then(() => {
-          navigation.push('Sign in')
+          navigation.replace('Sign in')
         }).catch((error) => {
         });
     }
@@ -69,7 +67,6 @@ export default function Home ({ navigation }){
       setisVisible(false)
     });
   }
-
 
     return(
       <View >

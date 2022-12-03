@@ -1,12 +1,10 @@
-import { StyleSheet, View, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
 import { ref, onValue,} from'firebase/database';
 import { Input, Button } from'react-native-elements';
 import { ListItem } from'react-native-elements';
 import { database } from '../../config/firebase';
-import { Dialog } from '@rneui/themed';
 import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
-import LinearGradient from 'react-native-linear-gradient';
 
 export default function ChatMain({navigation}) {
 
@@ -26,8 +24,6 @@ export default function ChatMain({navigation}) {
 
       const filtered = indexes.filter((item)  => {
         return (Object.values(item).join('').toLowerCase().includes(filtering.toLocaleLowerCase()))})
-        /*.sort((a, b) => a == "Paranormal" ? -1 : (b == "General" ? 1 : a.localeCompare(b)))
-        .sort((a, b) => a == "General" ? -1 : (b == "Paranormal" ? 1 : a.localeCompare(b)))*/
         .sort(function(a) { if (a == "Paranormal" ) {return -1}})
         .sort(function(a) { if (a == "General") {return -1}})
 

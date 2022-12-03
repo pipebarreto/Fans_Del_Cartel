@@ -37,7 +37,10 @@ const LogIn = ({navigation}) => {
       }; 
 
     const signin = () => {
-      signInWithEmailAndPassword(auth, email, password)
+    if(email=='' || password==''){
+        return Alert.alert("Igresa correo y contraseña");
+    }
+      signInWithEmailAndPassword(auth, email.trim(), password.trim())
         .then((userCredential) => {
             if (userCredential.user.emailVerified == false){
                 Alert.alert('Por favor verifica primero tu correo. .\n Recuerda que puede encontrarse en correo no deseado')
@@ -56,8 +59,8 @@ const LogIn = ({navigation}) => {
         <BrackgroundGradient>
                 {/* <View style={styles.container}>*/ }
 
-            <View style={{paddingVertical:20}}>
-                <Image source={require('../../images/2025.png')} style={{ width: windowWidth / 1.8, height: windowHeight / 4, borderRadius:25, opacity:0.95 }} />
+            <View style={{paddingVertical:30}}>
+                <Image source={require('../../images/2025.png')} style={{ width: windowWidth / 2.2, height: windowHeight / 4.5, borderRadius:25, opacity:0.95 }} />
             </View>
 
             <Input

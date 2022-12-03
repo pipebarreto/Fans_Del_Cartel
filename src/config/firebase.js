@@ -6,7 +6,6 @@ import { getDatabase} from'firebase/database';
 const firebaseConfig = {
     apiKey: "AIzaSyAcXRTebgKdw9jh0zIA6-dklYcKTd4rU_A",
     authDomain: "fans-del-cartel.firebaseapp.com",
-    //databaseURL: "https://fans-del-cartel-default-rtdb.firebaseio.com",
     projectId: "fans-del-cartel",
     storageBucket: "fans-del-cartel.appspot.com",
     messagingSenderId: "767068644787",
@@ -19,7 +18,6 @@ const firebaseConfig = {
     const auth = getAuth(app);
 
     const database = getDatabase(app);
-
 
     //const db = initializeFirestore(app, {experimentalForceLongPolling: true});
     
