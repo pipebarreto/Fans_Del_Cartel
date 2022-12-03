@@ -48,15 +48,11 @@ export default function AudiosMain() {
         if (!playbackStatus.isLoaded) {    
            
           if (playbackStatus.error) {
-
-            console.log("error");
             Alert(`Lo sentimos. Ha ocurrido un error. : ${playbackStatus.error}`);
-
           }
         } else {
           if (playbackStatus.isPlaying) {
-           // setInfo("Reproduciendo...")
-           // console.log(playbackStatus.isPlaying)
+
             if(playbackStatus.durationMillis){
             setAlong(playbackStatus.positionMillis);
             }
@@ -83,8 +79,6 @@ export default function AudiosMain() {
 
           if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
             setPlaying(false);
-       //     setVisible(false);
-            console.log("The player has just finished playing and will stop. Maybe you want to play something else")
           }
 
           }

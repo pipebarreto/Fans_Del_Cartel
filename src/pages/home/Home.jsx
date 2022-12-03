@@ -56,8 +56,6 @@ export default function Home ({ navigation }){
             setNews(dataWithKeys)   
         }})
         }, []);
-
-        console.log(news);
   
 
     const updateName=()=>{

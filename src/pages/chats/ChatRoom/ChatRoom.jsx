@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import {  Bubble, GiftedChat, InputToolbar } from 'react-native-gifted-chat'
+import {  Bubble, GiftedChat, InputToolbar, Send, LoadEarlier } from 'react-native-gifted-chat'
 import {  View, Text } from 'react-native';
 import { push, ref, onValue, query, limitToLast } from'firebase/database';
 import { auth, database } from '../../../config/firebase';
+import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
+import { Button, Icon } from'react-native-elements';
 
 export default function ChatRoom2({route}) {
   const [messages, setMessages] = useState([]);
+  const [number, setNumber] = useState(30);
+  const [showEarlier, setShowEarlier] = useState(false)
 
   const{ data } = route.params;
 
 useEffect(() => {
-  const itemsRef = query(ref(database, `chats/${data}`), limitToLast(50));
+  const itemsRef = query(ref(database, `chats/${data}`), limitToLast(number));
 
    onValue(itemsRef, (snapshot) => {
       const data = snapshot.val();
@@ -26,18 +30,20 @@ useEffect(() => {
       
        });
         setMessages(dataWithKeys)
-
     }})
-    }, []);
+    }, [number]);
+
+    useEffect(() => {
+      number==messages.length? setShowEarlier(true): setShowEarlier(false);
+    }, [messages]);
 
   
     const add = (message) => { 
-      console.log(message);
       push(    
         ref(database,  `chats/${data}`),     
         { message: message[0].text,  user:{_id: message[0].user._id, name: message[0].user.name} });
     }
-
+    
 
   function renderBubble(props) {
     return (
@@ -49,11 +55,11 @@ useEffect(() => {
               },
             }}
         />);}
-        
+
+
   function renderInputToolbar (props) {
-    return <InputToolbar {...props} containerStyle={{
+    return <InputToolbar {...props} placeholder="Escribir mensaje..." containerStyle={{
       borderRadius:15,
-      backgroundColor:'white'
     }}/>
   }
 
@@ -62,15 +68,30 @@ useEffect(() => {
       <View style={{height:10}}></View>
     )
 }
+
           
   return (
-    <View style={{flex:1, backgroundColor:'#EAF6F6', paddingVertical:10}}>
+    <View style={{flex:1,  paddingVertical:10}}>
     <GiftedChat
+      maxInputLength={2000}
+
+      renderChatEmpty={()=><DialogLoading/>}
+
+      loadEarlier={showEarlier}
+      //infiniteScroll={true}
+      //renderLoading={() =>  <DialogLoading/>}
+      onLoadEarlier={()=>{setNumber(number+30)}}
+
+      renderLoadEarlier={(props)=><LoadEarlier {...props} label='Cargar mensajes anteriores'/>}
+
+      renderSend={(props)=><Send {...props} alwaysShowSend label='Enviar'/>}
+
+      scrollToBottom={true}
+      scrollToBottomComponent={()=><Icon name="angle-double-down" type='font-awesome'/>}
       wrapInSafeArea={false}
       renderChatFooter={renderChatFooter}
       renderInputToolbar={renderInputToolbar} 
-      label='Enviar'
-      placeholder='Escribir mensaje...'
+      isAnimated={false}
       messages={messages}
       onSend={messages => add(messages)}
       inverted={false}
