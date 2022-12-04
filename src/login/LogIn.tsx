@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Image, Dimensions, Alert } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 import { auth } from '../config/firebase';
-import { signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { Overlay } from 'react-native-elements';
-import BrackgroundGradient from './BrackgroundGradient';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -56,7 +55,7 @@ const LogIn = ({navigation}) => {
 
     return (
 
-        <BrackgroundGradient>
+        <View style={{alignItems:'center'}}>
                 {/* <View style={styles.container}>*/ }
 
             <View style={{paddingVertical:30}}>
@@ -70,7 +69,7 @@ const LogIn = ({navigation}) => {
                 value={email}
                 onChangeText={text => setEmail(text)} autoCompleteType={undefined}            />
             <Input
-                placeholder='Ingresa tu clave'
+                placeholder='Ingresa tu contraseña'
                 label='Clave'
                 leftIcon={{ type: 'material', name: 'lock' }}
                 value={password}
@@ -102,7 +101,7 @@ const LogIn = ({navigation}) => {
 
             <Button title="Cancelar" buttonStyle={[styles.button, {marginVertical:15}]} onPress={openForgotPassword} />
             </Overlay>
-            </BrackgroundGradient>
+            </View>
     )
 }
 const styles = StyleSheet.create({

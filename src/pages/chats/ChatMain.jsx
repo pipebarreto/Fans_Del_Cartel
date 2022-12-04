@@ -1,7 +1,7 @@
 import { View, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
 import { ref, onValue,} from'firebase/database';
-import { Input, Button } from'react-native-elements';
+import { Input } from'react-native-elements';
 import { ListItem } from'react-native-elements';
 import { database } from '../../config/firebase';
 import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';

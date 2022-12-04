@@ -11,8 +11,6 @@ import BrackgroundGradient from './src/login/BrackgroundGradient';
 
 const Stack = createNativeStackNavigator();
 
-// Buttons in the home page
-// A lot of padding in the top of chat component
 
 export default function App() {
 
@@ -22,7 +20,6 @@ export default function App() {
     setIsLoaded(true);
   });
 
-  //TrackPlayer.registerPlaybackService(() => PlaybackService);
   
   return (
 

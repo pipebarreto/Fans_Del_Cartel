@@ -1,10 +1,6 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ChatMain from './ChatMain';
 import ChatRoom from './ChatRoom/ChatRoom';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Header } from'react-native-elements';
-
 
 const Stack = createNativeStackNavigator();
 

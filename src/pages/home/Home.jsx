@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
 import { Card, Input, Text, Button } from'react-native-elements';
 import { signOut } from "firebase/auth";
-import RNRestart from 'react-native-restart'
 import { Icon } from '@rneui/themed';
 import { Overlay } from 'react-native-elements';
 import { useState, useEffect } from 'react';
@@ -10,6 +9,7 @@ import { updateProfile } from 'firebase/auth';
 import {  ref, onValue} from'firebase/database';
 import { auth, database } from '../../config/firebase';
 import { DialogLoading } from '@rneui/base/dist/Dialog/Dialog.Loading';
+import BrackgroundGradient from "../../login/BrackgroundGradient";
 
 
 //import { AdMobBanner } from "expo-ads-admob";
@@ -69,7 +69,7 @@ export default function Home ({ navigation }){
   }
 
     return(
-      <View >
+      <BrackgroundGradient>
         <ScrollView>     
 
         <Card>
@@ -151,7 +151,7 @@ export default function Home ({ navigation }){
         </View>
         </Overlay>
       
-      </View>
+      </BrackgroundGradient>
     )
 }
 

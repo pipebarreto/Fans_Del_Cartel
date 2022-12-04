@@ -36,10 +36,10 @@ export default function Podcast({player}) {
 
         <View>
 
-          <ListItem bottomDivider onPress={() => {player({link: item.play, image:item.image, title:item.title, duration: item.duration, stream:false})}}>
+          <ListItem containerStyle={{backgroundColor:'#EAF6F6'}} bottomDivider onPress={() => {player({link: item.play, image:item.image, title:item.title, duration: item.duration, stream:false})}}>
             
            <Avatar source={{uri: item.image}} />
-            <ListItem.Content>
+            <ListItem.Content >
                 <ListItem.Title>{item.title}</ListItem.Title>
                 <ListItem.Subtitle>{Math.round(item.duration/1000/60)} mimutos</ListItem.Subtitle>
             </ListItem.Content>

@@ -3,7 +3,6 @@ import { View, StyleSheet, Dimensions, Alert } from 'react-native'
 import { Input, Button } from 'react-native-elements';
 import { auth } from '../config/firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
-import BrackgroundGradient from './BrackgroundGradient';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -37,7 +36,6 @@ const SignUp = () => {
 
     return (
 
-        <BrackgroundGradient>
           <View style={styles.container}>
             <Input
                 labelStyle={{ paddingTop: 0 }}
@@ -53,7 +51,7 @@ const SignUp = () => {
                 value={email}
                 onChangeText={text => setEmail(text)} autoCompleteType={undefined}            />
             <Input
-                placeholder='Ingresa tu clave'
+                placeholder='Ingresa tu contraseña'
                 label='Clave'
                 leftIcon={{ type: 'material', name: 'lock' }}
                 value={password} onChangeText={text => setPassword(text)}
@@ -62,16 +60,14 @@ const SignUp = () => {
 
             <Button title='Crear cuenta'  buttonStyle={styles.buttonStyle} style={styles.button} onPress={register} />
             </View>  
-        </BrackgroundGradient>
     )
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
         width:'100%',
-        marginBottom: 150,
+        marginTop: 50,
     },
     button: {
         width: windowWidth*0.9,
