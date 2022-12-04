@@ -1,15 +1,6 @@
 {
   "expo": {
     "plugins": [
-      [
-        "expo-notifications",
-        {
-          "icon": "./local/assets/notification-icon.png",
-          "color": "#ffffff",
-          "sounds": [
-          ]
-        }
-      ]
     ],
     "name": "Fans_Del_Cartel",
     "slug": "Fans_Del_Cartel",
