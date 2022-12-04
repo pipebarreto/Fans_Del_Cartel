@@ -7,8 +7,6 @@
           "icon": "./local/assets/notification-icon.png",
           "color": "#ffffff",
           "sounds": [
-            "./local/assets/notification-sound.wav",
-            "./local/assets/notification-sound-other.wav"
           ]
         }
       ]
@@ -42,10 +40,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./images/2025.png",
         "backgroundColor": "#000000"
-      }
+      },
+      "package": "com.diegobar.Fans_Del_Cartel"
     },
     "web": {
       "favicon": "./images/2025.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "dd7939d8-318b-41e1-a591-4e8c3ba65ddc"
+      }
     }
   }
 }
