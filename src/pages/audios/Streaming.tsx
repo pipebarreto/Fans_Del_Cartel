@@ -11,7 +11,7 @@ export default function Streaming ({player}) {
 
           {/*<Text h5>AUDIO EN VIVO</Text>*/}
 
-          <ListItem containerStyle={{backgroundColor:'#EAF6F6'}} onPress={() => {player({
+          <ListItem onPress={() => {player({
             link:"http://26593.live.streamtheworld.com:3690/LA_MEGA_BOGAAC.aac", 
             image:"https://files.lamega.com.rcnra-dev.com/assets/public/custom/rcnradiocross-footer/logos/logofooter.png",
             stream:true,

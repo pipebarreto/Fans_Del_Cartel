@@ -33,9 +33,7 @@ export default function PagesNavigator() {
           return <Icon name={iconName} size={size} color={focused? color: "#CDF0EA"}  tvParallaxProperties={undefined}  />
            },
            tabBarStyle:{
-            backgroundColor:'#150050',
-            height:100,
-            
+            backgroundColor:'#150050'        
           },
          /* tabBarItemStyle:{
             backgroundColor:'#150050',

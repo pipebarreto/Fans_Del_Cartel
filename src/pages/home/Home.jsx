@@ -76,7 +76,7 @@ export default function Home ({ navigation }){
         <Card.Title>¡Bienvenido!</Card.Title>
         <Card.Divider/>
 
-          <Text >¡Bienvenido,  {auth.currentUser.displayName}! 
+          <Text >¡Bienvenido, {auth.currentUser.displayName}! 
           El Cartel de La mega es un programa de las noches en Colombia que abarca principalmente los temas de relaciones de pareja y el tema paranormal.</Text>
 
          </Card>
