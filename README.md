@@ -1,6 +1,6 @@
 # Fans_Del_Cartel
 
-Technologies used:
+Besides the routing and basic components, these are some of the Technologies used for the project:
 
 - This application used GiftedChat for creating the chat rooms.
 - Firebasebase and  firebase authentication for the database and authentication of users.
